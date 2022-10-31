@@ -1,0 +1,567 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D339DD3128DA3DE6003512B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D339DD3028DA3DE6003512B1 /* AppDelegate.m */; };
+		D339DD3728DA3DE6003512B1 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = D339DD3628DA3DE6003512B1 /* StartView.m */; };
+		D339DD3A28DA3DE6003512B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D339DD3828DA3DE6003512B1 /* Main.storyboard */; };
+		D339DD3F28DA3DE7003512B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D339DD3D28DA3DE7003512B1 /* LaunchScreen.storyboard */; };
+		D339DD4228DA3DE7003512B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D339DD4128DA3DE7003512B1 /* main.m */; };
+		D3690FB3291052200067D041 /* UIAlertController+Window.m in Sources */ = {isa = PBXBuildFile; fileRef = D3690FB2291052200067D041 /* UIAlertController+Window.m */; };
+		D3F7DEDC28F1D72E00B4A36E /* PhraseLockOEM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F7DEDA28F1D71100B4A36E /* PhraseLockOEM.framework */; };
+		D3F7DEDD28F1D72F00B4A36E /* PhraseLockOEM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3F7DEDA28F1D71100B4A36E /* PhraseLockOEM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D3F7DF0128F3659E00B4A36E /* ch_fr.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEEB28F3659E00B4A36E /* ch_fr.xml */; };
+		D3F7DF0228F3659E00B4A36E /* en_uk.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEEC28F3659E00B4A36E /* en_uk.xml */; };
+		D3F7DF0328F3659E00B4A36E /* en_us.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEED28F3659E00B4A36E /* en_us.xml */; };
+		D3F7DF0428F3659E00B4A36E /* de_de.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEEE28F3659E00B4A36E /* de_de.xml */; };
+		D3F7DF0528F3659E00B4A36E /* ch_de.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEEF28F3659E00B4A36E /* ch_de.xml */; };
+		D3F7DF0628F3659E00B4A36E /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEF128F3659E00B4A36E /* start.png */; };
+		D3F7DF0928F3659E00B4A36E /* PLOEMController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F7DEFA28F3659E00B4A36E /* PLOEMController.m */; };
+		D3F7DF0A28F3659E00B4A36E /* FC.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F7DEFB28F3659E00B4A36E /* FC.m */; };
+		D3F7DF0B28F3659E00B4A36E /* db.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F7DEFC28F3659E00B4A36E /* db.m */; };
+		D3F7DF0D28F3659E00B4A36E /* my_fido2_cert.p12 in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DF0028F3659E00B4A36E /* my_fido2_cert.p12 */; };
+		D3F7DF1028F3660F00B4A36E /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F7DF0E28F3660F00B4A36E /* TBXML.m */; };
+		D3F7DF1328F366CC00B4A36E /* pl_512.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DF1228F366CC00B4A36E /* pl_512.png */; };
+		D3F7DF1728F369B900B4A36E /* ServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F7DF1528F369B900B4A36E /* ServiceView.m */; };
+		D3F7DF1928F36ABC00B4A36E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DF1828F36ABC00B4A36E /* Assets.xcassets */; };
+		D3F7DF2528F4ACE900B4A36E /* QRProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F7DF1C28F4ACE900B4A36E /* QRProxy.m */; };
+		D3F7DF2628F4ACE900B4A36E /* MTBBarcodeScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F7DF1F28F4ACE900B4A36E /* MTBBarcodeScanner.m */; };
+		D3F7DF2728F4ACE900B4A36E /* Scanner.mm in Sources */ = {isa = PBXBuildFile; fileRef = D3F7DF2228F4ACE900B4A36E /* Scanner.mm */; };
+		D3F7DF2828F4ACE900B4A36E /* Scanner.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DF2328F4ACE900B4A36E /* Scanner.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D3F7DEDE28F1D72F00B4A36E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D3F7DEDD28F1D72F00B4A36E /* PhraseLockOEM.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D339DD2C28DA3DE6003512B1 /* PhraseLockOEM_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhraseLockOEM_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D339DD2F28DA3DE6003512B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D339DD3028DA3DE6003512B1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D339DD3528DA3DE6003512B1 /* StartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
+		D339DD3628DA3DE6003512B1 /* StartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
+		D339DD3928DA3DE6003512B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D339DD3E28DA3DE7003512B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D339DD4028DA3DE7003512B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D339DD4128DA3DE7003512B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D3690FB1291052200067D041 /* UIAlertController+Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Window.h"; sourceTree = "<group>"; };
+		D3690FB2291052200067D041 /* UIAlertController+Window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Window.m"; sourceTree = "<group>"; };
+		D3F7DEDA28F1D71100B4A36E /* PhraseLockOEM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PhraseLockOEM.framework; sourceTree = "<group>"; };
+		D3F7DEEB28F3659E00B4A36E /* ch_fr.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ch_fr.xml; sourceTree = "<group>"; };
+		D3F7DEEC28F3659E00B4A36E /* en_uk.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = en_uk.xml; sourceTree = "<group>"; };
+		D3F7DEED28F3659E00B4A36E /* en_us.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = en_us.xml; sourceTree = "<group>"; };
+		D3F7DEEE28F3659E00B4A36E /* de_de.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = de_de.xml; sourceTree = "<group>"; };
+		D3F7DEEF28F3659E00B4A36E /* ch_de.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ch_de.xml; sourceTree = "<group>"; };
+		D3F7DEF128F3659E00B4A36E /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
+		D3F7DEF428F3659E00B4A36E /* db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = db.h; sourceTree = "<group>"; };
+		D3F7DEF528F3659E00B4A36E /* FC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FC.h; sourceTree = "<group>"; };
+		D3F7DEF628F3659E00B4A36E /* PLOEMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLOEMController.h; sourceTree = "<group>"; };
+		D3F7DEFA28F3659E00B4A36E /* PLOEMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLOEMController.m; sourceTree = "<group>"; };
+		D3F7DEFB28F3659E00B4A36E /* FC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FC.m; sourceTree = "<group>"; };
+		D3F7DEFC28F3659E00B4A36E /* db.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = db.m; sourceTree = "<group>"; };
+		D3F7DF0028F3659E00B4A36E /* my_fido2_cert.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = my_fido2_cert.p12; sourceTree = "<group>"; };
+		D3F7DF0E28F3660F00B4A36E /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		D3F7DF0F28F3660F00B4A36E /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		D3F7DF1228F366CC00B4A36E /* pl_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pl_512.png; sourceTree = "<group>"; };
+		D3F7DF1528F369B900B4A36E /* ServiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceView.m; sourceTree = "<group>"; };
+		D3F7DF1628F369B900B4A36E /* ServiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceView.h; sourceTree = "<group>"; };
+		D3F7DF1828F36ABC00B4A36E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D3F7DF1B28F4ACE900B4A36E /* ScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerDelegate.h; sourceTree = "<group>"; };
+		D3F7DF1C28F4ACE900B4A36E /* QRProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRProxy.m; sourceTree = "<group>"; };
+		D3F7DF1E28F4ACE900B4A36E /* MTBBarcodeScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTBBarcodeScanner.h; sourceTree = "<group>"; };
+		D3F7DF1F28F4ACE900B4A36E /* MTBBarcodeScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTBBarcodeScanner.m; sourceTree = "<group>"; };
+		D3F7DF2028F4ACE900B4A36E /* QRProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRProxy.h; sourceTree = "<group>"; };
+		D3F7DF2128F4ACE900B4A36E /* Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scanner.h; sourceTree = "<group>"; };
+		D3F7DF2228F4ACE900B4A36E /* Scanner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Scanner.mm; sourceTree = "<group>"; };
+		D3F7DF2328F4ACE900B4A36E /* Scanner.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Scanner.xib; sourceTree = "<group>"; };
+		D3F7DF2428F4ACE900B4A36E /* QRProxyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRProxyDelegate.h; sourceTree = "<group>"; };
+		D3F7DF2928F4C14F00B4A36E /* PhraseLockOEM_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhraseLockOEM_iOS.entitlements; sourceTree = "<group>"; };
+		D3F7DF2C28F4C55200B4A36E /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		D3F7DF2D28F4C56A00B4A36E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D339DD2928DA3DE6003512B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3F7DEDC28F1D72E00B4A36E /* PhraseLockOEM.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D339DD2328DA3DE6003512B1 = {
+			isa = PBXGroup;
+			children = (
+				D339DD2E28DA3DE6003512B1 /* PhraseLockOEM_iOS */,
+				D339DD2D28DA3DE6003512B1 /* Products */,
+				D3F7DED628F1D6D600B4A36E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D339DD2D28DA3DE6003512B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D339DD2C28DA3DE6003512B1 /* PhraseLockOEM_iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D339DD2E28DA3DE6003512B1 /* PhraseLockOEM_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D3F7DF2928F4C14F00B4A36E /* PhraseLockOEM_iOS.entitlements */,
+				D339DD4128DA3DE7003512B1 /* main.m */,
+				D339DD3D28DA3DE7003512B1 /* LaunchScreen.storyboard */,
+				D339DD3828DA3DE6003512B1 /* Main.storyboard */,
+				D3F7DF1828F36ABC00B4A36E /* Assets.xcassets */,
+				D339DD4028DA3DE7003512B1 /* Info.plist */,
+				D3F7DF1128F366CC00B4A36E /* images */,
+				D3F7DEF028F3659E00B4A36E /* icons */,
+				D3F7DEEA28F3659E00B4A36E /* keyboard */,
+				D3F7DEFF28F3659E00B4A36E /* keystore */,
+				D3F7DEF228F3659E00B4A36E /* lib */,
+				D3F7DF1A28F4ACE900B4A36E /* Scanner */,
+				D339DD2F28DA3DE6003512B1 /* AppDelegate.h */,
+				D339DD3028DA3DE6003512B1 /* AppDelegate.m */,
+				D339DD3528DA3DE6003512B1 /* StartView.h */,
+				D339DD3628DA3DE6003512B1 /* StartView.m */,
+				D3F7DF1528F369B900B4A36E /* ServiceView.m */,
+				D3F7DF1628F369B900B4A36E /* ServiceView.h */,
+			);
+			path = PhraseLockOEM_iOS;
+			sourceTree = "<group>";
+		};
+		D3F7DED628F1D6D600B4A36E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3F7DF2D28F4C56A00B4A36E /* libsqlite3.0.tbd */,
+				D3F7DF2C28F4C55200B4A36E /* libxml2.2.tbd */,
+				D3F7DEDA28F1D71100B4A36E /* PhraseLockOEM.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3F7DEEA28F3659E00B4A36E /* keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				D3F7DEEB28F3659E00B4A36E /* ch_fr.xml */,
+				D3F7DEEC28F3659E00B4A36E /* en_uk.xml */,
+				D3F7DEED28F3659E00B4A36E /* en_us.xml */,
+				D3F7DEEE28F3659E00B4A36E /* de_de.xml */,
+				D3F7DEEF28F3659E00B4A36E /* ch_de.xml */,
+			);
+			path = keyboard;
+			sourceTree = "<group>";
+		};
+		D3F7DEF028F3659E00B4A36E /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				D3F7DEF128F3659E00B4A36E /* start.png */,
+			);
+			path = icons;
+			sourceTree = "<group>";
+		};
+		D3F7DEF228F3659E00B4A36E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				D3690FB1291052200067D041 /* UIAlertController+Window.h */,
+				D3690FB2291052200067D041 /* UIAlertController+Window.m */,
+				D3F7DF0F28F3660F00B4A36E /* TBXML.h */,
+				D3F7DF0E28F3660F00B4A36E /* TBXML.m */,
+				D3F7DEF428F3659E00B4A36E /* db.h */,
+				D3F7DEFC28F3659E00B4A36E /* db.m */,
+				D3F7DEF528F3659E00B4A36E /* FC.h */,
+				D3F7DEFB28F3659E00B4A36E /* FC.m */,
+				D3F7DEF628F3659E00B4A36E /* PLOEMController.h */,
+				D3F7DEFA28F3659E00B4A36E /* PLOEMController.m */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		D3F7DEFF28F3659E00B4A36E /* keystore */ = {
+			isa = PBXGroup;
+			children = (
+				D3F7DF0028F3659E00B4A36E /* my_fido2_cert.p12 */,
+			);
+			path = keystore;
+			sourceTree = "<group>";
+		};
+		D3F7DF1128F366CC00B4A36E /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D3F7DF1228F366CC00B4A36E /* pl_512.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		D3F7DF1A28F4ACE900B4A36E /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				D3F7DF1D28F4ACE900B4A36E /* QR-Reader */,
+				D3F7DF2028F4ACE900B4A36E /* QRProxy.h */,
+				D3F7DF1C28F4ACE900B4A36E /* QRProxy.m */,
+				D3F7DF1B28F4ACE900B4A36E /* ScannerDelegate.h */,
+				D3F7DF2128F4ACE900B4A36E /* Scanner.h */,
+				D3F7DF2228F4ACE900B4A36E /* Scanner.mm */,
+				D3F7DF2328F4ACE900B4A36E /* Scanner.xib */,
+				D3F7DF2428F4ACE900B4A36E /* QRProxyDelegate.h */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		D3F7DF1D28F4ACE900B4A36E /* QR-Reader */ = {
+			isa = PBXGroup;
+			children = (
+				D3F7DF1E28F4ACE900B4A36E /* MTBBarcodeScanner.h */,
+				D3F7DF1F28F4ACE900B4A36E /* MTBBarcodeScanner.m */,
+			);
+			path = "QR-Reader";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D339DD2B28DA3DE6003512B1 /* PhraseLockOEM_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D339DD4528DA3DE7003512B1 /* Build configuration list for PBXNativeTarget "PhraseLockOEM_iOS" */;
+			buildPhases = (
+				D339DD2828DA3DE6003512B1 /* Sources */,
+				D339DD2928DA3DE6003512B1 /* Frameworks */,
+				D339DD2A28DA3DE6003512B1 /* Resources */,
+				D3F7DEDE28F1D72F00B4A36E /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PhraseLockOEM_iOS;
+			productName = PhraseLockOEM_iOS;
+			productReference = D339DD2C28DA3DE6003512B1 /* PhraseLockOEM_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D339DD2428DA3DE6003512B1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					D339DD2B28DA3DE6003512B1 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+				};
+			};
+			buildConfigurationList = D339DD2728DA3DE6003512B1 /* Build configuration list for PBXProject "PhraseLockOEM_iOS" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D339DD2328DA3DE6003512B1;
+			productRefGroup = D339DD2D28DA3DE6003512B1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D339DD2B28DA3DE6003512B1 /* PhraseLockOEM_iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D339DD2A28DA3DE6003512B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3F7DF0528F3659E00B4A36E /* ch_de.xml in Resources */,
+				D339DD3F28DA3DE7003512B1 /* LaunchScreen.storyboard in Resources */,
+				D3F7DF1928F36ABC00B4A36E /* Assets.xcassets in Resources */,
+				D3F7DF0628F3659E00B4A36E /* start.png in Resources */,
+				D3F7DF0428F3659E00B4A36E /* de_de.xml in Resources */,
+				D3F7DF0D28F3659E00B4A36E /* my_fido2_cert.p12 in Resources */,
+				D3F7DF2828F4ACE900B4A36E /* Scanner.xib in Resources */,
+				D3F7DF0228F3659E00B4A36E /* en_uk.xml in Resources */,
+				D3F7DF0128F3659E00B4A36E /* ch_fr.xml in Resources */,
+				D3F7DF1328F366CC00B4A36E /* pl_512.png in Resources */,
+				D339DD3A28DA3DE6003512B1 /* Main.storyboard in Resources */,
+				D3F7DF0328F3659E00B4A36E /* en_us.xml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D339DD2828DA3DE6003512B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3F7DF1728F369B900B4A36E /* ServiceView.m in Sources */,
+				D3F7DF1028F3660F00B4A36E /* TBXML.m in Sources */,
+				D3F7DF0A28F3659E00B4A36E /* FC.m in Sources */,
+				D339DD3728DA3DE6003512B1 /* StartView.m in Sources */,
+				D3F7DF0B28F3659E00B4A36E /* db.m in Sources */,
+				D339DD3128DA3DE6003512B1 /* AppDelegate.m in Sources */,
+				D339DD4228DA3DE7003512B1 /* main.m in Sources */,
+				D3F7DF2728F4ACE900B4A36E /* Scanner.mm in Sources */,
+				D3F7DF2628F4ACE900B4A36E /* MTBBarcodeScanner.m in Sources */,
+				D3F7DF2528F4ACE900B4A36E /* QRProxy.m in Sources */,
+				D3690FB3291052200067D041 /* UIAlertController+Window.m in Sources */,
+				D3F7DF0928F3659E00B4A36E /* PLOEMController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D339DD3828DA3DE6003512B1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D339DD3928DA3DE6003512B1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D339DD3D28DA3DE7003512B1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D339DD3E28DA3DE7003512B1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D339DD4328DA3DE7003512B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D339DD4428DA3DE7003512B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D339DD4628DA3DE7003512B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = PhraseLockOEM_iOS/PhraseLockOEM_iOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A363SXL5T7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PhraseLockOEM_iOS/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ipoxo.phraselockoem.PhraseLockOEM-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D339DD4728DA3DE7003512B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = PhraseLockOEM_iOS/PhraseLockOEM_iOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A363SXL5T7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PhraseLockOEM_iOS/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ipoxo.phraselockoem.PhraseLockOEM-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D339DD2728DA3DE6003512B1 /* Build configuration list for PBXProject "PhraseLockOEM_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D339DD4328DA3DE7003512B1 /* Debug */,
+				D339DD4428DA3DE7003512B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D339DD4528DA3DE7003512B1 /* Build configuration list for PBXNativeTarget "PhraseLockOEM_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D339DD4628DA3DE7003512B1 /* Debug */,
+				D339DD4728DA3DE7003512B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D339DD2428DA3DE6003512B1 /* Project object */;
+}
