@@ -155,7 +155,7 @@
 		 This is for development purposes only. It is just
 		 more convenient not to hit the button every time.
 		 */
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.75 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.50 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 			[alertCtrl dismissViewControllerAnimated:NO completion:nil];
 			@synchronized (self->userMutex) {
 				self->userMutex = @"1";
