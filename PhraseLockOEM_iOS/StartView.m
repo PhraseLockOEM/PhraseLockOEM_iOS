@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "UIAlertController+Window.h"
 #import "StartView.h"
+#import "FC.h"
 #import "db.h"
 
 #import <PhraseLockOEM/PhraseLockDefines.h>
@@ -15,7 +16,7 @@
 #import <PhraseLockOEM/PLHID.h>
 
 #define DEBUG_IS_ACIVE					YES
-#define AUTO_CONNECT_ON_LAUNCH			0
+#define AUTO_CONNECT_ON_LAUNCH			1
 
 // iPoxo Community API-Key
 uint8_t COMMUNITY_API_KEY_T4[] = {
@@ -119,24 +120,11 @@ uint8_t COMMUNITY_API_KEY_T4[] = {
 		[self onTogglePLConnection:nil];
 	});
 #endif
-/*
-	NSString* dmp;
-	dmp = [db dumpTableJSON:@"blockdata"];
-	NSLog(@"dump: %@",dmp);
-	
-	dmp = [db dumpTableJSON:@"residentCredData"];
-	NSLog(@"dump: %@",dmp);
- */
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	/*
-	dispatch_async(dispatch_get_main_queue(), ^{
-		int x = [APPDELEGATE userAction:@"NON"];
-	});
-	 */
-	//NSLog(@" User: %d",x);
 }
 
 #pragma mark - UI Actions -
@@ -145,7 +133,6 @@ uint8_t COMMUNITY_API_KEY_T4[] = {
 {
 	/*	A new-line is added */
 	[self sendHIDData: [NSString stringWithFormat:@"%@\r", self.hidString.text ]];
-	//[self sendHIDData: [NSString stringWithFormat:@"%@", self.hidString.text ]];
 }
 
 - (IBAction)onSwitchUSBMode:(id)sender
@@ -265,7 +252,8 @@ uint8_t COMMUNITY_API_KEY_T4[] = {
 #pragma mark - PhraseLockStatusDelegate callbacks -
 
 /*	Output of PhraseLock-Framework logging*/
--(void)delegateLogging:(uint32_t)filter logStr:(NSString*)logStr {
+-(void)delegateLogging:(uint32_t)filter logStr:(NSString*)logStr
+{
 	dispatch_async(dispatch_get_main_queue(), ^{
 		printf("%s\n", [logStr cStringUsingEncoding:[NSString defaultCStringEncoding]] );
 	});
@@ -288,7 +276,8 @@ uint8_t COMMUNITY_API_KEY_T4[] = {
 	});
 }
 
--(void) delegatePhraseLockDidDisconnect{
+-(void) delegatePhraseLockDidDisconnect
+{
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[self.bleSwitch setOn:FALSE animated:NO];
 		[self showConnectionState:NO stateText:@"No Connection"];
@@ -305,7 +294,8 @@ uint8_t COMMUNITY_API_KEY_T4[] = {
 	});
 }
 
--(void) delegatePhraseLockConnectTimeOut {
+-(void) delegatePhraseLockConnectTimeOut
+{
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[self.bleSwitch setOn:FALSE animated:NO];
 		[self showConnectionState:NO stateText:@"Connection time out"];
@@ -313,7 +303,8 @@ uint8_t COMMUNITY_API_KEY_T4[] = {
 	});
 }
 
--(void) delegateReceiveMasterKey:(uint8_t)error iv:(NSData*)iv aes256Key:(NSData*)aes256Key {
+-(void) delegateReceiveMasterKey:(uint8_t)error iv:(NSData*)iv aes256Key:(NSData*)aes256Key
+{
 	dispatch_async(dispatch_get_main_queue(), ^{
 		/**
 		 This callback is called when your main-key + iv-vector is transmittet from the Phrase-Lock USB-Key
@@ -346,7 +337,8 @@ uint8_t COMMUNITY_API_KEY_T4[] = {
 
 #pragma mark - HID callbacks -
 
--(void)delegateKeyStatus:(BOOL)numLock scrollLock:(BOOL)scrollLock capsLock:(BOOL)capsLock {
+-(void)delegateKeyStatus:(BOOL)numLock scrollLock:(BOOL)scrollLock capsLock:(BOOL)capsLock
+{
 	dispatch_async(dispatch_get_main_queue(), ^{
 		if (capsLock ) {
 			self.lockState.text = @"Caps-Lock set!";
@@ -359,7 +351,8 @@ uint8_t COMMUNITY_API_KEY_T4[] = {
 /*
  This function is called when sending HID-data is finished.
  */
--(void)delegateKeyboardStreamDone:(uint8_t)error {
+-(void)delegateKeyboardStreamDone:(uint8_t)error
+{
 	dispatch_async(dispatch_get_main_queue(), ^{
 		// Callback after send HID-data
 		[self log:[NSString stringWithFormat:@"HID Data Transfer done with error: %d",error]];

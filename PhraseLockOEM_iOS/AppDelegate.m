@@ -57,14 +57,6 @@
 	}
 }
 
-- (uint32_t)getAtomicSignCounter:(uint32_t)baseNumber
-{
-	uint32_t counter1 = [db getBlockdata:ATOMIC_COUNTER dataUint32_t:(uint32_t)1];
-	counter1 += (baseNumber + 1);
-	[db setBlockdata:ATOMIC_COUNTER dataUint32_t:counter1];
-	return counter1;
-}
-
 - (NSData *)getAuthnStateConfig:(NSString *)rp
 {
 	if(rp!=nil && rp.length>0){
@@ -77,24 +69,6 @@
 - (NSData *)getCoreDataForServiceUUID:(NSString *)serviceUUID
 {
 	return [db getCoreDataSet:serviceUUID];
-}
-
-- (uint32_t)getSignCounterForRPID:(uint32_t *)signCountBase
-{
-	uint32_t count = [self getAtomicSignCounter:1];
-	if (count == 0) {    // count 0 will indicate invalid token
-		count = [self getAtomicSignCounter:0];
-	}
-	
-	uint8_t * byte = (uint8_t*) signCountBase;
-	
-	// Hier wird nach Big-Endian umgeschrieben
-	*byte++ = (count >> 24) & 0xff;
-	*byte++ = (count >> 16) & 0xff;
-	*byte++ = (count >> 8) & 0xff;
-	*byte++ = (count >> 0) & 0xff;
-	
-	return count;
 }
 
 - (NSString *)readResidentKeys:(NSString *)rpidHash

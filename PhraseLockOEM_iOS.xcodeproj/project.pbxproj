@@ -13,8 +13,8 @@
 		D339DD3F28DA3DE7003512B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D339DD3D28DA3DE7003512B1 /* LaunchScreen.storyboard */; };
 		D339DD4228DA3DE7003512B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D339DD4128DA3DE7003512B1 /* main.m */; };
 		D3690FB3291052200067D041 /* UIAlertController+Window.m in Sources */ = {isa = PBXBuildFile; fileRef = D3690FB2291052200067D041 /* UIAlertController+Window.m */; };
-		D3A638412910708E0068E557 /* PhraseLockOEM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A6383F291070280068E557 /* PhraseLockOEM.framework */; };
-		D3A638422910708E0068E557 /* PhraseLockOEM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3A6383F291070280068E557 /* PhraseLockOEM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D3C3640C2922C6C9002E9DCE /* PhraseLockOEM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C3640A2922C6BC002E9DCE /* PhraseLockOEM.framework */; };
+		D3C3640D2922C6C9002E9DCE /* PhraseLockOEM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3C3640A2922C6BC002E9DCE /* PhraseLockOEM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D3F7DF0128F3659E00B4A36E /* ch_fr.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEEB28F3659E00B4A36E /* ch_fr.xml */; };
 		D3F7DF0228F3659E00B4A36E /* en_uk.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEEC28F3659E00B4A36E /* en_uk.xml */; };
 		D3F7DF0328F3659E00B4A36E /* en_us.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEED28F3659E00B4A36E /* en_us.xml */; };
@@ -42,7 +42,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D3A638422910708E0068E557 /* PhraseLockOEM.framework in Embed Frameworks */,
+				D3C3640D2922C6C9002E9DCE /* PhraseLockOEM.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,7 +61,7 @@
 		D339DD4128DA3DE7003512B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D3690FB1291052200067D041 /* UIAlertController+Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Window.h"; sourceTree = "<group>"; };
 		D3690FB2291052200067D041 /* UIAlertController+Window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Window.m"; sourceTree = "<group>"; };
-		D3A6383F291070280068E557 /* PhraseLockOEM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PhraseLockOEM.framework; sourceTree = "<group>"; };
+		D3C3640A2922C6BC002E9DCE /* PhraseLockOEM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhraseLockOEM.framework; path = PhraseLockOEM_iOS/PhraseLockOEM.framework; sourceTree = "<group>"; };
 		D3F7DEEB28F3659E00B4A36E /* ch_fr.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ch_fr.xml; sourceTree = "<group>"; };
 		D3F7DEEC28F3659E00B4A36E /* en_uk.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = en_uk.xml; sourceTree = "<group>"; };
 		D3F7DEED28F3659E00B4A36E /* en_us.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = en_us.xml; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3A638412910708E0068E557 /* PhraseLockOEM.framework in Frameworks */,
+				D3C3640C2922C6C9002E9DCE /* PhraseLockOEM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +110,7 @@
 		D339DD2328DA3DE6003512B1 = {
 			isa = PBXGroup;
 			children = (
+				D3C3640A2922C6BC002E9DCE /* PhraseLockOEM.framework */,
 				D339DD2E28DA3DE6003512B1 /* PhraseLockOEM_iOS */,
 				D339DD2D28DA3DE6003512B1 /* Products */,
 				D3F7DED628F1D6D600B4A36E /* Frameworks */,
@@ -127,7 +128,6 @@
 		D339DD2E28DA3DE6003512B1 /* PhraseLockOEM_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D3A6383F291070280068E557 /* PhraseLockOEM.framework */,
 				D3F7DF2928F4C14F00B4A36E /* PhraseLockOEM_iOS.entitlements */,
 				D339DD4128DA3DE7003512B1 /* main.m */,
 				D339DD3D28DA3DE7003512B1 /* LaunchScreen.storyboard */,

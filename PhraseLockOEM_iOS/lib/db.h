@@ -122,7 +122,6 @@ typedef enum {
 }
 
 #define ATOMIC_COUNTER 			@"ATOMIC_COUNTER"
-#define GLOBAL_PIN				@"GLOBAL_PIN"
 #define GLOBAL_AUTHNDATA		@"GLOBAL_AUTHNDATA"
 #define RESIDENT_KEY			@"RESIDENT_KEY_"
 #define CORE_DATA				@"CORE_DATA_"
@@ -164,7 +163,10 @@ typedef enum {
 +(nullable NSString*) readTXTFile:(nonnull NSString*)fname ext:(nonnull NSString*)ext origBundle:(BOOL)origBundle;
 +(nullable NSData*) readCertDataFromFile:(nonnull NSString*)fname ext:(nonnull NSString*)ext origBundle:(BOOL)origBundle;
 
-#pragma mark - Resident Credentials & U2F Keypairs -
+#pragma mark - Keymap tabel to dictionary -
++(nullable NSDictionary*)prepareKBDLayout:(nonnull NSString*)kbdLayout os:(PL_OS_TYPE)os;
+
+#pragma mark - CTAP2 & Resident Credential Data -
 
 +(void)storeResidentKeyRecord:(nonnull NSString*)uname
 					   userid:(nonnull NSString*)userid
@@ -186,11 +188,6 @@ typedef enum {
 +(int)countAllCoreDataSets;
 +(nullable NSMutableArray*)getAllCoreDataSets;
 
-#pragma mark - Keymap tabel to dictionary -
-+(nullable NSDictionary*)prepareKBDLayout:(nonnull NSString*)kbdLayout os:(PL_OS_TYPE)os;
-
-#pragma mark - Development Only -
-//+(nullable NSData*)getDevelopmentCoreDataSet;
 
 
 @end

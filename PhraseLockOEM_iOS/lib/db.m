@@ -18,105 +18,17 @@ NSString *const kApplicationGroupId = @"group.com.phraselock.oem";
 
 +(void) resetAuthenticationState {
 	[db deleteBlockdata:GLOBAL_AUTHNDATA];
-	[db deleteBlockdata:GLOBAL_PIN];
 }
 
 #pragma mark - DB Initialisation -
 
 +(void)initOnStartDB{
-	
-	//NSString * sqliteStruct = [db dumpTable:@"sqlite_master"];
-	//NSLog(@"SqLite Structure: %@",sqliteStruct);
-	
-	// Version der Datenbank
-	[db checkDBVersion:FALSE];
-	
+			
 	// Block-Data
 	[db checkBlockDataExists:FALSE];
 	
 	// Resident Credentials
 	[db checkResidentCredDataExists:FALSE];
-	
-	// Die Version überprüfen und ggf Änderungen durchführen
-	int dbVersion = [db getDBVersion];
-	if(dbVersion == 0){
-		[db setDBVersion:1];
-		dbVersion = [db getDBVersion];
-	}
-}
-
-
-#pragma mark - DB Version -
-
-+(void) checkDBVersion:(BOOL)reset {
-	int dbres_2= SQLITE_ERROR;
-_DB_OPEN_
-	dbres = sqlite3_prepare(pDB, [@"SELECT name FROM sqlite_master WHERE type='table' AND name='plnkversion';" UTF8String],-1, &dbps, NULL);
-	dbres = sqlite3_step(dbps);
-	/*dbres =*/ sqlite3_finalize(dbps);
-	dbres_2 = dbres;
-_DB_CLOSE_
-	if(dbres_2!= SQLITE_ROW || reset){
-		[db dbPlnkVersionReset];
-	}
-}
-
-+(void) dbPlnkVersionReset {
-_DB_OPEN_
-	if(pDB!=NULL && pDB!=nil){
-		int dbres = SQLITE_ERROR;
-		
-		dbres = sqlite3_prepare(pDB, "DROP TABLE IF EXISTS plnkversion;",-1, &dbps, NULL);
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-		
-		dbps=NULL;
-		dbres = sqlite3_prepare(pDB,
-								"CREATE TABLE IF NOT EXISTS plnkversion (\
-								idx				INTEGER NOT NULL PRIMARY KEY, \
-								dbv				INTEGER DEFAULT '0' \
-								);", -1, &dbps, NULL);
-		
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-	}
-_DB_CLOSE_
-}
-
-+(int) getDBVersion {
-	NSString * dbv =@"0";
-_DB_OPEN_
-	NSString *cmd = [NSString stringWithFormat:@"SELECT dbv as dbv from plnkversion where idx='%d';",1];
-	dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
-	if(sqlite3_step(dbps)==SQLITE_ROW){
-		
-		char* cx = (char*)sqlite3_column_text(dbps, 0);
-		if (cx!=NULL) {
-			dbv = [NSString stringWithFormat:@"%@", [[NSString alloc] initWithUTF8String:(const char*) cx]];
-		}
-	}
-	/*dbres =*/ sqlite3_finalize(dbps);
-_DB_CLOSE_
-	return [dbv intValue];
-}
-
-+(void) setDBVersion:(int)dbVersion {
-	int currentdbVersion = [db getDBVersion];
-	if (currentdbVersion < dbVersion) {
-_DB_OPEN_
-		NSString *cmd;
-		int dbres_1, dbres_2, dbres_3;
-		
-		cmd = nil;
-		cmd = [NSString stringWithFormat:
-			   @"INSERT OR REPLACE INTO plnkversion \
-			   (idx, dbv) \
-			   VALUES ( '%d', '%d' );",
-			   1, dbVersion];
-		
-_DB_EXECUTE_( cmd, dbres_1, dbres_2, dbres_3 );
-_DB_CLOSE_
-	}
 }
 
 #pragma mark - Blockdata -
@@ -133,7 +45,6 @@ _DB_CLOSE_
 	if(dbres_2!= SQLITE_ROW || reset){
 		[db dbBlockDataReset];
 	}
-
 }
 
 +(void) dbBlockDataReset {
@@ -326,7 +237,7 @@ _DB_CLOSE_
 	return ars;
 }
 
-#pragma mark - Resident Credential Data -
+#pragma mark - CTAP2 & Resident Credential Data -
 
 +(void) checkResidentCredDataExists:(BOOL)reset {
 	int dbres_2= SQLITE_ERROR;
@@ -398,8 +309,6 @@ _DB_OPEN_
 	}
 _DB_CLOSE_
 }
-
-#pragma mark - Resident Credentials & U2F Keypairs -
 
 +(void)storeResidentKeyRecord:(nonnull NSString*)uname
 					   userid:(nonnull NSString*)userid
@@ -476,19 +385,6 @@ _DB_CLOSE_
 	return phrasedump;
 }
 
-+(NSString*) dumpTableJSON:(NSString*)tablename {
-	NSMutableString* sb = [[NSMutableString alloc] init];
-_DB_OPEN_
-	dbps=NULL;
-	NSString *cmd = nil;
-	cmd = [NSString stringWithFormat:@"SELECT * from %@;",tablename];
-	dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
-	[db dumpSQLResultJSON:dbps sb:sb tableName:tablename];
-	/*dbres =*/ sqlite3_finalize(dbps);
-_DB_CLOSE_
-	return [NSString stringWithString:sb];
-}
-
 +(NSString*) dumpQuery:(NSString*)cmd {
 	NSString * phrasedump = @"<root>";
 _DB_OPEN_
@@ -501,6 +397,19 @@ _DB_OPEN_
 	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 	return phrasedump;
+}
+
++(NSString*) dumpTableJSON:(NSString*)tablename {
+	NSMutableString* sb = [[NSMutableString alloc] init];
+_DB_OPEN_
+	dbps=NULL;
+	NSString *cmd = nil;
+	cmd = [NSString stringWithFormat:@"SELECT * from %@;",tablename];
+	dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
+	[db dumpSQLResultJSON:dbps sb:sb tableName:tablename];
+	/*dbres =*/ sqlite3_finalize(dbps);
+_DB_CLOSE_
+	return [NSString stringWithString:sb];
 }
 
 +(NSString*) dumpSQLResult:(sqlite3_stmt*)dbps dump:(NSString*)dump  ptx:(int*)ptx {
@@ -710,7 +619,6 @@ _DB_CLOSE_
 	}
 	return keyboardMap;
 }
-
 
 #pragma mark - Table Management & Creation -
 
