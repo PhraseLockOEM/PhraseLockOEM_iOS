@@ -21,5 +21,7 @@
 @property (strong, nonatomic) PhraseLock* ploem;
 @property (strong, nonatomic) UIWindow *window;
 
+- (void)deleteAuthnStateConfig:(NSString *)rp;
+
 @end
 

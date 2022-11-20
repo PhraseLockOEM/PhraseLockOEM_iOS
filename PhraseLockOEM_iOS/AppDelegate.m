@@ -35,6 +35,17 @@
 	return YES;
 }
 
+#pragma mark - Additional functions -
+
+- (void)deleteAuthnStateConfig:(NSString *)rp
+{
+	if(rp!=nil && rp.length>0){
+		[db deleteBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp]];
+	}else{
+		[db deleteBlockdata:GLOBAL_AUTHNDATA];
+	}
+}
+
 #pragma mark - PLUserDataCB -
 
 - (NSData *)getAAGUID
@@ -48,12 +59,12 @@
 	return certPWD;
 }
 
-- (void)deleteAuthnStateConfig:(NSString *)rp
+- (void)storeAuthnStateConfig:(NSData *)authConfig rp:(NSString *)rp
 {
 	if(rp!=nil && rp.length>0){
-		[db deleteBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp]];
+		[db setBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp] dataNSData:authConfig];
 	}else{
-		[db deleteBlockdata:GLOBAL_AUTHNDATA];
+		[db setBlockdata:GLOBAL_AUTHNDATA dataNSData:authConfig];
 	}
 }
 
@@ -69,25 +80,6 @@
 - (NSData *)getCoreDataForServiceUUID:(NSString *)serviceUUID
 {
 	return [db getCoreDataSet:serviceUUID];
-}
-
-- (NSString *)readResidentKeys:(NSString *)rpidHash
-{
-	return [db readResidentKeys:rpidHash];
-}
-
-- (NSString *)readResidentKeys:(NSString *)cridHash rpidHash:(NSString *)rpidHash
-{
-	return [db readResidentKeys:cridHash rpidHash:rpidHash];
-}
-
-- (void)storeAuthnStateConfig:(NSData *)authConfig rp:(NSString *)rp
-{
-	if(rp!=nil && rp.length>0){
-		[db setBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp] dataNSData:authConfig];
-	}else{
-		[db setBlockdata:GLOBAL_AUTHNDATA dataNSData:authConfig];
-	}
 }
 
 - (void)storeResidentKeyRecord:(NSString *)uname
@@ -106,6 +98,16 @@
 				   residentkey:residentkey
 					   privkey:privkey];
 	
+}
+
+- (NSString *)readResidentKeys:(NSString *)rpidHash
+{
+	return [db readResidentKeys:rpidHash];
+}
+
+- (NSString *)readResidentKeys:(NSString *)cridHash rpidHash:(NSString *)rpidHash
+{
+	return [db readResidentKeys:cridHash rpidHash:rpidHash];
 }
 
 #define USER_ACTION			1
