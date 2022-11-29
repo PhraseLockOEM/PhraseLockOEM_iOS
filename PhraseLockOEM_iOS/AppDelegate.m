@@ -48,9 +48,14 @@
 
 #pragma mark - PLUserDataCB -
 
-- (NSData *)getAAGUID
+- (NSString*)getAAGUID
 {
-	return hexStringToNSData(@"F0DB552BB9B74AE6BCAF4E87F9C563D4");
+	return @"F0DB552BB9B74AE6BCAF4E87F9C563D4";
+}
+
+- (NSData *)getCoreDataForServiceUUID:(NSString *)serviceUUID
+{
+	return [db getCoreDataSet:serviceUUID];
 }
 
 - (NSString *)getCertPWD:(NSString *)certID
@@ -59,27 +64,23 @@
 	return certPWD;
 }
 
-- (void)storeAuthnStateConfig:(NSData *)authConfig rp:(NSString *)rp
-{
-	if(rp!=nil && rp.length>0){
-		[db setBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp] dataNSData:authConfig];
+-(void)storeAuthnStateConfig:(NSString*) authConfig rp:(NSString*)rp {
+	if(rp!=nil && rp.length>0)
+	{
+		[db setBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp] dataNSString:authConfig];
 	}else{
-		[db setBlockdata:GLOBAL_AUTHNDATA dataNSData:authConfig];
+		[db setBlockdata:GLOBAL_AUTHNDATA dataNSString:authConfig];
 	}
 }
 
-- (NSData *)getAuthnStateConfig:(NSString *)rp
+- (NSString *)readAuthnStateConfig:(NSString *)rp
 {
-	if(rp!=nil && rp.length>0){
-		return [db getBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp] dataNSData:nil];
+	if(rp!=nil && rp.length>0)
+	{
+		return [db getBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp] dataNSString:nil];
 	}else{
-		return [db getBlockdata:GLOBAL_AUTHNDATA dataNSData:nil];
+		return [db getBlockdata:GLOBAL_AUTHNDATA dataNSString:nil];
 	}
-}
-
-- (NSData *)getCoreDataForServiceUUID:(NSString *)serviceUUID
-{
-	return [db getCoreDataSet:serviceUUID];
 }
 
 - (void)storeResidentKeyRecord:(NSString *)uname
@@ -194,5 +195,6 @@
 {
 	
 }
+
 
 @end

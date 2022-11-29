@@ -22,6 +22,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 - (void)deleteAuthnStateConfig:(NSString *)rp;
+- (NSString *)getCertPWD:(NSString *)certID;
 
 @end
 
