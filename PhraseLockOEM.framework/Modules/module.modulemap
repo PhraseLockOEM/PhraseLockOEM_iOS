@@ -1,6 +1,0 @@
-framework module PhraseLockOEM {
-  umbrella header "PhraseLockOEM.h"
-
-  export *
-  module * { export * }
-}

@@ -64,20 +64,19 @@
 	return certPWD;
 }
 
--(void)storeAuthnStateConfig:(NSString*) authConfig rp:(NSString*)rp {
-	if(rp!=nil && rp.length>0)
+-(void)storeAuthnStateConfig:(NSString*) authConfig rp1:(NSString*)rp1 rp2:(NSString*)rp2 {
+	if(rp1!=nil && rp1.length>0 && rp2!=nil)
 	{
-		[db setBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp] dataNSString:authConfig];
+		[db setBlockdata:[NSString stringWithFormat:@"%@%@%@_%@",GLOBAL_AUTHNDATA,@"_",rp1,rp2] dataNSString:authConfig];
 	}else{
 		[db setBlockdata:GLOBAL_AUTHNDATA dataNSString:authConfig];
 	}
 }
 
-- (NSString *)readAuthnStateConfig:(NSString *)rp
-{
-	if(rp!=nil && rp.length>0)
+-(NSString*)readAuthnStateConfig:(NSString*)rp1 rp2:(NSString*)rp2{
+	if(rp1!=nil && rp1.length>0 && rp2!=nil)
 	{
-		return [db getBlockdata:[NSString stringWithFormat:@"%@%@%@",GLOBAL_AUTHNDATA,@"_",rp] dataNSString:nil];
+		return [db getBlockdata:[NSString stringWithFormat:@"%@%@%@_%@",GLOBAL_AUTHNDATA,@"_",rp1,rp2] dataNSString:nil];
 	}else{
 		return [db getBlockdata:GLOBAL_AUTHNDATA dataNSString:nil];
 	}

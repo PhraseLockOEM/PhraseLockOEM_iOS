@@ -75,9 +75,9 @@ uint8_t IPOXO_API_KEY_T2[] = {
 	 Der Paramete rp (relying party) gibt an, welche Autentifizierungsdaten herangezogen werden sollen.
 	 Phrase-Lock unterstützt, anders als Hardware-Token, die Verwendung uneingeschränkt viele zu verwenden.
 	 */
-	NSString* rp = @"GENERIC_RP_1";
-	//[APPDELEGATE deleteAuthnStateConfig:rp]; //Wird nur für Testzwecke gelöscht
-	
+	NSString* rp1 = @"8CC24602-03BA-4F24-B80C-8F16EB93AA1E";
+	NSString* rp2 = @"14678";
+
 	NSData *apiKey = [[NSData alloc] initWithBytes:IPOXO_API_KEY length:sizeof(IPOXO_API_KEY)];
 
 	APPDELEGATE.ploem = [[PhraseLock alloc] initPhraseLock:APPDELEGATE
@@ -86,17 +86,19 @@ uint8_t IPOXO_API_KEY_T2[] = {
 	
 	[APPDELEGATE.ploem enableUserVerification:FALSE];
 	
-	bool bInit = [APPDELEGATE.ploem loadTokenID:rp
+	bool bInit = [APPDELEGATE.ploem loadTokenID:rp1
+											rp2:rp2
 										pinCode:nil
 									p12PrivCert:p12PrivCert
 										certPWD:[APPDELEGATE getCertPWD:certID]];
 
 	if(!bInit)
 	{
-		bInit = [APPDELEGATE.ploem loadTokenID:rp
-									   pinCode:self.hidString.text
-								   p12PrivCert:p12PrivCert
-									   certPWD:[APPDELEGATE getCertPWD:certID]];
+		bool bInit = [APPDELEGATE.ploem loadTokenID:rp1
+												rp2:rp2
+											pinCode:self.hidString.text
+										p12PrivCert:p12PrivCert
+											certPWD:[APPDELEGATE getCertPWD:certID]];
 	}
 
 	/**
