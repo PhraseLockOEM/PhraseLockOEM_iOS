@@ -34,7 +34,7 @@ uint8_t IPOXO_API_KEY_T2[] = {
 	0x79,0xF7,0xD0,0x0E,0x5A,0x20,0x0E,0x2F,0x77,0xC6,0x7F,0x96,0x2D,0x57,0x11,0xDB,
 };
 
-#define IPOXO_API_KEY 		COMMUNITY_API_KEY_T4
+#define IPOXO_API_KEY 		IPOXO_API_KEY_T2
 
 @interface StartView ()
 
@@ -82,7 +82,7 @@ uint8_t IPOXO_API_KEY_T2[] = {
 
 	APPDELEGATE.ploem = [[PhraseLock alloc] initPhraseLock:APPDELEGATE
 													apiKey:apiKey
-											   debugFilter:0x0000 ];
+											   debugFilter:0xFFFF ];
 	
 	[APPDELEGATE.ploem enableUserVerification:FALSE];
 	
