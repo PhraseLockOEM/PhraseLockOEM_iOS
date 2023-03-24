@@ -15,8 +15,8 @@
 #import <PhraseLockOEM/PhraseLock.h>
 #import <PhraseLockOEM/PLHID.h>
 
-#define DEBUG_IS_ACIVE					YES
-#define AUTO_CONNECT_ON_LAUNCH			1
+#define DEBUG_IS_ACIVE					  YES
+#define AUTO_CONNECT_ON_LAUNCH			0
 
 // iPoxo Community API-Key
 uint8_t COMMUNITY_API_KEY_T4[] = {
@@ -85,7 +85,7 @@ uint8_t IPOXO_API_KEY_T2[] = {
 											   debugFilter:0xFFFF ];
 	
 	[APPDELEGATE.ploem enableUserVerification:FALSE];
-	
+	  
 	bool bInit = [APPDELEGATE.ploem loadTokenID:rp1
 											rp2:rp2
 										pinCode:nil
@@ -94,11 +94,11 @@ uint8_t IPOXO_API_KEY_T2[] = {
 
 	if(!bInit)
 	{
-		bool bInit = [APPDELEGATE.ploem loadTokenID:rp1
-												rp2:rp2
-											pinCode:self.hidString.text
-										p12PrivCert:p12PrivCert
-											certPWD:[APPDELEGATE getCertPWD:certID]];
+    bInit = [APPDELEGATE.ploem loadTokenID:rp1
+                                       rp2:rp2
+                                   pinCode:self.hidString.text
+                               p12PrivCert:p12PrivCert
+                                   certPWD:[APPDELEGATE getCertPWD:certID]];
 	}
 
 	/**
@@ -138,10 +138,10 @@ uint8_t IPOXO_API_KEY_T2[] = {
 	[plhid setDelegate:self];
 	
 #if AUTO_CONNECT_ON_LAUNCH == 1
-	dispatch_async(dispatch_get_main_queue(), ^{
-		[self.bleSwitch setOn:YES animated:NO];
-		[self onTogglePLConnection:nil];
-	});
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.bleSwitch setOn:YES animated:NO];
+    [self onTogglePLConnection:nil];
+  });
 #endif
 
 }
@@ -160,11 +160,11 @@ uint8_t IPOXO_API_KEY_T2[] = {
 
 - (IBAction)onSwitchUSBMode:(id)sender
 {
-	if(usbCurrentMode == CPD_USB)
+	if(usbCurrentMode == CHF_USB)
 	{
 		[APPDELEGATE.ploem plp_usb_app_mode:FDO_USB];
 	}else{
-		[APPDELEGATE.ploem plp_usb_app_mode:CPD_USB];
+		[APPDELEGATE.ploem plp_usb_app_mode:CHF_USB];
 	}	
 }
 
@@ -351,7 +351,7 @@ uint8_t IPOXO_API_KEY_T2[] = {
 			case FDO_USB:
 				self.usbModeLabel.text = @"CTAP2";
 				break;
-			case CPD_USB:
+			case CHF_USB:
 				self.usbModeLabel.text = @"CTAP2 | HID";
 				break;
 		}

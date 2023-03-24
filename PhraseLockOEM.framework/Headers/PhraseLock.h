@@ -142,6 +142,10 @@
 -(void) plp_un_install_app;
 -(void) plp_reboot;
 
+#pragma mark - Testing -
+
+-(void) sendTestData:(NSString*)s;
+
 @end
 
 

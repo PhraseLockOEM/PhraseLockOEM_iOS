@@ -42,10 +42,13 @@ typedef enum {
 }PL_UPDATE_MODE;
 
 typedef enum {
-	RETURN_USB_MODE 	= 0x00,		// NO USB - Not yet implemented
-	HID_USB 			= 0x01,		// HID Keyboard
-	FDO_USB 			= 0x02,		// FIDO Support
-	CPD_USB 			= 0x03,		// Composit Device Support (KBD_USB | KBD_USB)
+	RETURN_USB_MODE 	= 0x00,						// NO USB - Not yet implemented
+	HID_USB 			= 0x01,						// HID Keyboard
+	FDO_USB 			= 0x02,						// FIDO Support
+	RAW_USB 			= 0x04,						// RAW Support
+	
+	CHF_USB 			= (HID_USB | FDO_USB),		// Composit Device Support (HID_USB | FDO_USB)
+	CHR_USB 			= (HID_USB | RAW_USB),		// Composit Device Support (HID_USB | RAW_USB)
 }pl_usbmode;
 
 typedef enum {
