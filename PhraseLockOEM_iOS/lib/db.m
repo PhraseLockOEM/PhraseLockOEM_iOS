@@ -557,69 +557,6 @@ _DB_CLOSE_
 	return coreDataArray;
 }
 
-#pragma mark - Keymap tabel to dictionary -
-
-+(NSDictionary*)prepareKBDLayout:(NSString*)kbdLayout os:(PL_OS_TYPE)os {
-	NSMutableDictionary* keyboardMap = nil;
-	if(kbdLayout!=nil){
-		int level=0;
-		TBXML * xml = [[TBXML alloc] initWithXMLString:kbdLayout];
-		TBXMLElement *root = xml.rootXMLElement;
-		NSDictionary *kbdlayout = [TBXML makeComplexDictionary:root mdict:NULL level:level];
-			
-		if(kbdlayout!=nil){
-			NSDictionary * osLayout = nil;
-			if		 (os==OS_WINDOWS_LINUX){
-				osLayout = [kbdlayout objectForKey:@"win"];
-			}else if (os==OS_MAC){
-				osLayout = [kbdlayout objectForKey:@"mac"];
-			}else{
-				// Default Windows
-				osLayout = [kbdlayout objectForKey:@"win"];
-			}
-								
-			if(osLayout!=nil){
-				keyboardMap = [[NSMutableDictionary alloc] init];
-				int len		= (int)[osLayout count];
-				NSArray	*k	= [[osLayout allKeys] sortedArrayUsingSelector:@selector(compare:)];
-				if (k!=nil) {
-					for(int index=0; index<len; index++){
-						NSString *idx = [k objectAtIndex:index];
-						NSDictionary * kbdrecord = [osLayout objectForKey:idx];
-						if(kbdrecord!=nil){
-							BOOL  valid = [[kbdrecord objectForKey:@"v"] boolValue];
-							if(valid){
-								NSString * cs = [kbdrecord objectForKey:@"_value_"];
-								NSString * ms = [kbdrecord objectForKey:@"m"];
-								NSString * ks = [kbdrecord objectForKey:@"k"];
-								if(cs!=nil && ms!=nil && ks!=nil){
-										
-									Byte c = 0;
-									if([cs length]>1){
-										c = [cs intValue];
-									}else{
-										c = (Byte)[cs characterAtIndex:0];
-									}
-										
-									Byte m = (Byte)[ms intValue];
-									Byte k = (Byte)[ks intValue];
-										
-									NSMutableDictionary *cx  = [[NSMutableDictionary alloc] init];
-									[cx setObject:[NSNumber numberWithInt:m] forKey:@"m"];
-									[cx setObject:[NSNumber numberWithInt:k] forKey:@"k"];
-									[keyboardMap setObject:cx forKey:[NSNumber numberWithInt:c] ];
-										
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	return keyboardMap;
-}
-
 #pragma mark - Table Management & Creation -
 
 +(NSString *) appSharedDataDirectoryPath {

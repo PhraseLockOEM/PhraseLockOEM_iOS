@@ -13,7 +13,12 @@
 #import <PhraseLockOEM/PhraseLockStatusDelegate.h>
 
 #pragma mark - HID Callbacks delegate -
- 
+
+typedef enum {
+  OS_WINDOWS_LINUX  = 0x01,   // Windows or Linux Host
+  OS_MAC            = 0x02,   // Mac Host
+}PL_OS_TYPE;
+
 @protocol HIDDelegate <NSObject>
 @optional
 
@@ -29,7 +34,7 @@
 
 -(void) setPLProtocol:(PhraseLock*)pl plDebug:(BOOL)plDebug;
 -(void) setDelegate:(id<HIDDelegate>)hidDelegate;
--(void) setKBDMapping:(NSDictionary*)kbdLayout;
+-(BOOL) setKBDLayout:(NSString*)kbdLayout oSType:(int)oSType;
 -(void) setHIDStream:(NSString*)keyboardStream;
 -(BOOL) verifyKBDStream:(NSString**)unknownChars;
 -(void) setStreamParam:(uint8_t)chunkSize kbdDelay:(uint8_t)kbdDelay;

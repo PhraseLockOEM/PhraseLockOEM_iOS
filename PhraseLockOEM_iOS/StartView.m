@@ -135,6 +135,7 @@ uint8_t IPOXO_API_KEY_T2[] = {
 	/* Initialize HID Output*/
 	plhid = nil;
 	plhid = [[PLHID alloc] init];
+  [plhid setPLProtocol:APPDELEGATE.ploem plDebug:DEBUG_IS_ACIVE];
 	[plhid setDelegate:self];
 	
 #if AUTO_CONNECT_ON_LAUNCH == 1
@@ -248,13 +249,12 @@ uint8_t IPOXO_API_KEY_T2[] = {
  The keyboard-, resp. scan code mapping may be different on different operating
  systems. This is why it must be considered do choose the right one.
  */
--(void)sendHIDData:(NSString*)asciiString {
-	
+-(void)sendHIDData:(NSString*)asciiString
+{	
 	NSString * map = [db readTXTFile:@"de_de" ext:@"xml" origBundle:YES];
-	NSDictionary* kbdMap = [db prepareKBDLayout:map os:OS_WINDOWS_LINUX];
-	[plhid setKBDMapping:kbdMap];
+  [plhid setStreamParam:6 kbdDelay:2];
+	[plhid setKBDLayout:map oSType:OS_WINDOWS_LINUX];
 	[plhid setHIDStream:asciiString];
-	[plhid setPLProtocol:APPDELEGATE.ploem plDebug:DEBUG_IS_ACIVE];
 		
 	NSString * unknownChars = nil;
 	if( ![plhid verifyKBDStream:&unknownChars] ){

@@ -110,13 +110,6 @@
 
 #define CURRENT_DB_NAME			@"phraselock_db"
 
-
-typedef enum {
-	OS_WINDOWS_LINUX	= 0x01, 	// Windows or Linux Host
-	OS_MAC		 		= 0x02,		// Mac Host
-}PL_OS_TYPE;
-
-
 @interface db : NSObject {
 	
 }
@@ -162,9 +155,6 @@ typedef enum {
 +(void) deleteFile:(nonnull NSString*)fname ext:(nonnull NSString*)ext;
 +(nullable NSString*) readTXTFile:(nonnull NSString*)fname ext:(nonnull NSString*)ext origBundle:(BOOL)origBundle;
 +(nullable NSData*) readCertDataFromFile:(nonnull NSString*)fname ext:(nonnull NSString*)ext origBundle:(BOOL)origBundle;
-
-#pragma mark - Keymap tabel to dictionary -
-+(nullable NSDictionary*)prepareKBDLayout:(nonnull NSString*)kbdLayout os:(PL_OS_TYPE)os;
 
 #pragma mark - CTAP2 & Resident Credential Data -
 
