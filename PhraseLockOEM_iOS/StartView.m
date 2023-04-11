@@ -254,6 +254,16 @@ uint8_t IPOXO_API_KEY_T2[] = {
 	NSString * map = [db readTXTFile:@"de_de" ext:@"xml" origBundle:YES];
   [plhid setStreamParam:6 kbdDelay:2];
 	[plhid setKBDLayout:map oSType:OS_WINDOWS_LINUX];
+
+  uint8_t chunks = 6;
+  uint8_t fDelay = 4;
+  if([plhid isV2BLEToken])
+  {
+    [plhid setStreamParam:chunks kbdDelay:2+(fDelay/8)];
+  }else{
+    [plhid setStreamParam:chunks kbdDelay:fDelay];
+  }
+
 	[plhid setHIDStream:asciiString];
 		
 	NSString * unknownChars = nil;

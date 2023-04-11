@@ -37,6 +37,7 @@ typedef enum {
 -(BOOL) setKBDLayout:(NSString*)kbdLayout oSType:(int)oSType;
 -(void) setHIDStream:(NSString*)keyboardStream;
 -(BOOL) verifyKBDStream:(NSString**)unknownChars;
+-(BOOL) isV2BLEToken;
 -(void) setStreamParam:(uint8_t)chunkSize kbdDelay:(uint8_t)kbdDelay;
 -(void) startdKBDStream;
 
