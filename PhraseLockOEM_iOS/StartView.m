@@ -82,7 +82,7 @@ uint8_t IPOXO_API_KEY_T2[] = {
 
 	APPDELEGATE.ploem = [[PhraseLock alloc] initPhraseLock:APPDELEGATE
 													apiKey:apiKey
-											   debugFilter:0xFFFF ];
+											   debugFilter:0x0088];
 	
 	[APPDELEGATE.ploem enableUserVerification:FALSE];
 	  
