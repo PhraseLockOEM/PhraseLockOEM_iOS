@@ -1,11 +1,3 @@
-//
-//  PhraseLockDefines.h
-//  PhraseLockOEM
-//
-//  Created by Thomas Donhauser on 27.02.22.
-//  Copyright © 2022 Thomas Donhauser. All rights reserved.
-//
-
 #ifndef PhraseLockDefines_h
 #define PhraseLockDefines_h
 

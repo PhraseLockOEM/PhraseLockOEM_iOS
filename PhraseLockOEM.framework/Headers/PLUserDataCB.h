@@ -1,11 +1,3 @@
-//
-//  PLUserDataCB.h
-//  PhraseLockOEM
-//
-//  Created by Thomas Donhauser on 22.07.22.
-//  Copyright © 2022 Thomas Donhauser. All rights reserved.
-//
-
 #ifndef PLUserDataCB_h
 #define PLUserDataCB_h
 

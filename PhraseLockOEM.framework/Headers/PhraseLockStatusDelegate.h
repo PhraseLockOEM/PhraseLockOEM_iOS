@@ -1,11 +1,3 @@
-//
-//  PhraseLockStatusDelegate.h
-//  PhraseLockOEM
-//
-//  Created by Thomas Donhauser on 15.09.22.
-//  Copyright © 2022 Thomas Donhauser. All rights reserved.
-//
-
 #ifndef PhraseLockStatusDelegate_h
 #define PhraseLockStatusDelegate_h
 
