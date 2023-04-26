@@ -44,6 +44,8 @@
 
 -(void) unLoadTokenID;
 
+-(bool) changePINCode:(NSString*)pinCode;
+
 -(void) enableUserVerification:(bool)uv;
 
 /* Extracts the Service-UUID from Core-Data */
