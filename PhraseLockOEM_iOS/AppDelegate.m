@@ -82,13 +82,17 @@
 	}
 }
 
-- (void)storeResidentKeyRecord:(NSString *)uname
-						userid:(NSString *)userid
-						 dname:(NSString *)dname
-					  rpidhash:(NSString *)rpidhash
-					  cridhash:(NSString *)cridhash
-				   residentkey:(NSString *)residentkey
-					   privkey:(NSString *)privkey
+-(void)storeResidentKeyRecord:(NSString*)rp1
+                          rp2:(NSString*)rp2
+                   credDomain:(NSString*)credDomain
+                     credName:(NSString*)credName
+                        uname:(NSString*)uname
+                       userid:(NSString*)userid
+                        dname:(NSString*)dname
+                     rpidhash:(NSString*)rpidhash
+                     cridhash:(NSString*)cridhash
+                  residentkey:(NSString*)residentkey
+                      privkey:(NSString*)privkey
 {
 	[db storeResidentKeyRecord:uname
 						userid:userid
@@ -97,15 +101,19 @@
 					  cridhash:cridhash
 				   residentkey:residentkey
 					   privkey:privkey];
-	
 }
 
-- (NSString *)readResidentKeys:(NSString *)rpidHash
+-(NSString*)readResidentKeys:(NSString*)rp1
+                         rp2:(NSString*)rp2
+                    rpidHash:(NSString*)rpidHash
 {
 	return [db readResidentKeys:rpidHash];
 }
 
-- (NSString *)readResidentKeys:(NSString *)cridHash rpidHash:(NSString *)rpidHash
+-(NSString*)readResidentKeys:(NSString*)rp1
+                         rp2:(NSString*)rp2
+                    cridHash:(NSString*)cridHash
+                    rpidHash:(NSString*)rpidHash
 {
 	return [db readResidentKeys:cridHash rpidHash:rpidHash];
 }
