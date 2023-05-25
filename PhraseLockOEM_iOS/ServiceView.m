@@ -8,7 +8,6 @@
 #import "AppDelegate.h"
 #import "ServiceView.h"
 #import "db.h"
-
 #import "QRProxy.h"
 
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -30,9 +29,25 @@
 	[qr postStartQRScanner];
 }
 
+-(void)inner_deleteAllRK
+{
+  [db delete_All_residentCredData];
+  NSString* jsonDump = [db dumpTable:@"residentCredData"];
+  NSLog(@"Dump of current resident credentials:\r %@",jsonDump);
+}
+
 - (IBAction)onDeleteResidentKeys:(id)sender
 {
-	[db delete_All_residentCredData];
+  NSString *msg = @"Delete all resident keys?";
+  ALERT_ASYNC(@"Phrase-Lock & FIDO2", msg );
+  ALERT_BUTTON(@"Yes",
+                {
+                  [self inner_deleteAllRK];
+                }
+              );
+  ALERT_BUTTON(@"No",
+               );
+  ALERT_ASYNC_SHOW
 }
 
 #pragma mark - Functions -

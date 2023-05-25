@@ -39,7 +39,6 @@ _DB_OPEN_
 	dbps=NULL;
 	dbres = sqlite3_prepare(pDB, [@"SELECT name FROM sqlite_master WHERE type='table' AND name='blockdata';" UTF8String],-1, &dbps, NULL);
 	dbres = sqlite3_step(dbps);
-	/*dbres =*/ sqlite3_finalize(dbps);
 	dbres_2 = dbres;
 _DB_CLOSE_
 	if(dbres_2!= SQLITE_ROW || reset){
@@ -55,12 +54,10 @@ _DB_OPEN_
 		/* blockdata */
 		dbres = sqlite3_prepare(pDB,"DROP TABLE IF EXISTS blockdata;",-1, &dbps, NULL);
 		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
 		
 		dbps=NULL;
 		dbres = sqlite3_prepare(pDB,"CREATE TABLE IF NOT EXISTS blockdata (idx TEXT NOT NULL PRIMARY KEY, data TEXT);", -1, &dbps, NULL);
 		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
 	}
 _DB_CLOSE_
 }
@@ -68,23 +65,26 @@ _DB_CLOSE_
 
 #pragma mark - BlockData I/O -
 
-+(BOOL) setBlockdata:(nonnull NSString*)key dataNSString:(nonnull NSString*)dataNSString {
++(BOOL) setBlockdata:(nonnull NSString*)key dataNSString:(nonnull NSString*)dataNSString
+{
+  BOOL rVal = FALSE;
 	if (dataNSString!=nil) {
 _DB_OPEN_
 		dbps=NULL;
 		dbres = sqlite3_prepare(pDB,
 		 [[NSString stringWithFormat:@"INSERT OR REPLACE INTO blockdata (idx, data) VALUES ('%@','%@');",key,dataNSString] UTF8String], -1, &dbps, NULL);
 		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-_DB_CLOSE_
-		if(dbres== SQLITE_DONE){
-			return TRUE;
-		}
-	}
-	return FALSE;
+    if(dbres== SQLITE_DONE){
+      rVal = TRUE;
+    }
+    _DB_CLOSE_
+  }
+  return rVal;
 }
 
-+(BOOL) setBlockdata:(nonnull NSString*)key dataNSData:(nonnull NSData*)dataNSData {
++(BOOL) setBlockdata:(nonnull NSString*)key dataNSData:(nonnull NSData*)dataNSData
+{
+  BOOL rVal = FALSE;
 	if (dataNSData!=nil) {
 		NSString* data = NSDataToHex(dataNSData);
 _DB_OPEN_
@@ -92,28 +92,27 @@ _DB_OPEN_
 		dbres = sqlite3_prepare(pDB,
 		 [[NSString stringWithFormat:@"INSERT OR REPLACE INTO blockdata (idx, data) VALUES ('%@','%@');",key,data] UTF8String], -1, &dbps, NULL);
 		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-_DB_CLOSE_
-		if(dbres== SQLITE_DONE){
-			return TRUE;
-		}
-	}
-	return FALSE;
+    if(dbres== SQLITE_DONE){
+      rVal = TRUE;
+    }
+    _DB_CLOSE_
+  }
+  return rVal;
 }
 
 +(BOOL) setBlockdata:(nonnull NSString*)key dataUint32_t:(uint32_t)dataUint32_t {
+  BOOL rVal = FALSE;
 	NSString* data = [NSString stringWithFormat:@"%d", dataUint32_t];
 _DB_OPEN_
 	dbps=NULL;
 	dbres = sqlite3_prepare(pDB,
 	 [[NSString stringWithFormat:@"INSERT OR REPLACE INTO blockdata (idx, data) VALUES ('%@','%@');",key,data] UTF8String], -1, &dbps, NULL);
 	dbres = sqlite3_step(dbps);
-	/*dbres =*/ sqlite3_finalize(dbps);
-_DB_CLOSE_
-	if(dbres== SQLITE_DONE){
-		return TRUE;
-	}
-	return FALSE;
+  if(dbres== SQLITE_DONE){
+    rVal = TRUE;
+  }
+  _DB_CLOSE_
+  return rVal;
 }
 
 +(nullable NSString*) getBlockdata:(nonnull NSString*)key dataNSString:( nullable NSString*)dataNSString {
@@ -130,7 +129,6 @@ _DB_OPEN_
 			result = dataNSString;
 		}
 	}
-	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 	return result;
 }
@@ -149,7 +147,6 @@ _DB_OPEN_
 			result = NSDataToHex(dataNSData);
 		}
 	}
-	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 	if(result!=nil && [result length]>0) {
 		return hexStringToNSData(result);
@@ -169,7 +166,6 @@ _DB_OPEN_
 		[db setBlockdata:key dataUint32_t:dataUint32_t];
 		result = [NSString stringWithFormat:@"%d", dataUint32_t];
 	}
-	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 	if(result!=nil && [result length]>0) {
 		return [result intValue];
@@ -182,7 +178,6 @@ _DB_OPEN_
 	dbps=NULL;
 	dbres = sqlite3_prepare(pDB,[[NSString stringWithFormat:@"DELETE from blockdata where idx='%@';",key] UTF8String], -1, &dbps, NULL);
 	dbres = sqlite3_step(dbps);
-	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 }
 
@@ -192,7 +187,6 @@ _DB_OPEN_
 	NSString*  cmd = [NSString stringWithFormat:@"DELETE from blockdata where idx like '%@%%';",key];
 	dbres = sqlite3_prepare(pDB,[cmd UTF8String], -1, &dbps, NULL);
 	dbres = sqlite3_step(dbps);
-	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 }
 
@@ -208,7 +202,6 @@ _DB_OPEN_
 			count = [NSString stringWithFormat:@"%@", [[NSString alloc] initWithUTF8String:(const char*) cx]];
 		}
 	}
-	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 	return [count intValue];
 }
@@ -229,7 +222,6 @@ _DB_OPEN_
 			NSData* dx = hexStringToNSData(ds);
 			[ars addObject:dx];
 		}
-		/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 	}else{
 		ars = [[NSMutableArray alloc] initWithCapacity:0];
@@ -239,134 +231,164 @@ _DB_CLOSE_
 
 #pragma mark - CTAP2 & Resident Credential Data -
 
-+(void) checkResidentCredDataExists:(BOOL)reset {
-	int dbres_2= SQLITE_ERROR;
-_DB_OPEN_
-	dbps=NULL;
-	dbres = sqlite3_prepare(pDB, [@"SELECT name FROM sqlite_master WHERE type='table' AND name='residentCredData';" UTF8String],-1, &dbps, NULL);
-	dbres = sqlite3_step(dbps);
-	/*dbres =*/ sqlite3_finalize(dbps);
-	dbres_2 = dbres;
-_DB_CLOSE_
-	if(dbres_2!= SQLITE_ROW || reset){
-		[db dbResidentCredDataReset];
-	}
-
-}
-
-+(void) dbResidentCredDataReset {
-_DB_OPEN_
-	if(pDB!=NULL && pDB!=nil){
-		int dbres = SQLITE_ERROR;
-
-		dbres = sqlite3_prepare(pDB, "DROP TABLE IF EXISTS residentCredData;",-1, &dbps, NULL);
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-		
-		dbres = sqlite3_prepare(pDB, "DROP INDEX IF EXISTS residentCredData_idx01;",-1, &dbps, NULL);
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-		
-		dbres = sqlite3_prepare(pDB, "DROP INDEX IF EXISTS residentCredData_idx02;",-1, &dbps, NULL);
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-		
-		dbres = sqlite3_prepare(pDB, "DROP INDEX IF EXISTS residentCredData_idx03;",-1, &dbps, NULL);
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-		
-		dbres = sqlite3_prepare(pDB,
-								"CREATE TABLE IF NOT EXISTS residentCredData (\
-								idx			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \
-								userid		TEXT DEFAULT '-', \
-								uname		TEXT DEFAULT '-', \
-								dname		TEXT DEFAULT '-', \
-								rpidhash    TEXT DEFAULT '-', \
-								cridhash	TEXT DEFAULT '-', \
-								residentkey TEXT DEFAULT '-', \
-								privkey     TEXT DEFAULT '-' \
-								);", -1, &dbps, NULL);
-
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-		
-		dbres = SQLITE_ERROR;
-		dbres = sqlite3_prepare(pDB,"CREATE UNIQUE INDEX residentCredData_idx01 ON residentCredData (rpidhash, cridhash);", -1, &dbps, NULL);
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-
-		dbres = SQLITE_ERROR;
-		dbres = sqlite3_prepare(pDB,"CREATE INDEX residentCredData_idx02 ON residentCredData (rpidhash);", -1, &dbps, NULL);
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-
-		dbres = SQLITE_ERROR;
-		dbres = sqlite3_prepare(pDB,"CREATE UNIQUE INDEX residentCredData_idx03 ON residentCredData (userid);", -1, &dbps, NULL);
-		dbres = sqlite3_step(dbps);
-		/*dbres =*/ sqlite3_finalize(dbps);
-
-		dbps=NULL;
-	}
-_DB_CLOSE_
-}
-
-+(void)storeResidentKeyRecord:(nonnull NSString*)uname
-					   userid:(nonnull NSString*)userid
-						dname:(nonnull NSString*)dname
-					 rpidhash:(nonnull NSString*)rpidhash
-					 cridhash:(nonnull NSString*)cridhash
-				  residentkey:(nonnull NSString*)residentkey
-					  privkey:(nonnull NSString*)privkey
++(void) checkResidentCredDataExists:(BOOL)reset
 {
-_DB_OPEN_
-	NSString *cmd;
-	int dbres_1, dbres_2, dbres_3;
-	
-	cmd = nil;
-	cmd = [NSString stringWithFormat:
-		   @"INSERT OR REPLACE INTO residentCredData \
-		   (uname, userid, dname, rpidhash, cridhash, residentkey, privkey) \
-		   VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@');",
-		   uname, userid, dname, rpidhash, cridhash, residentkey, privkey];
-_DB_EXECUTE_( cmd, dbres_1, dbres_2, dbres_3 );
-_DB_CLOSE_
+  int dbres_2= SQLITE_ERROR;
+  _DB_OPEN_
+  
+  dbres = sqlite3_prepare(pDB, [@"SELECT name FROM sqlite_master WHERE type='table' AND name='residentCredData';" UTF8String],-1, &dbps, NULL);
+  dbres = sqlite3_step(dbps);
+  dbres_2 = dbres;
+  _DB_CLOSE_
+  if(dbres_2!= SQLITE_ROW || reset){
+    [db dbResidentCredDataReset];
+  }
 }
 
-+(nullable NSString*)readResidentKeys:(NSString*)rpidHash
++(void) dbResidentCredDataReset
 {
-	NSMutableString* sb = [[NSMutableString alloc] init];
-_DB_OPEN_
-	dbps=NULL;
-	NSString *cmd = [NSString stringWithFormat:@"SELECT residentkey, privkey from residentCredData where rpidhash='%@' ;", rpidHash];
-	dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
-	[db dumpSQLResultJSON:dbps sb:sb tableName:@"rklist"];
-	/*dbres =*/ sqlite3_finalize(dbps);
-_DB_CLOSE_
-	return [NSString stringWithString:sb];
+  _DB_OPEN_
+  if(pDB!=NULL && pDB!=nil){
+    int dbres = SQLITE_ERROR;
+    
+    dbres = sqlite3_prepare(pDB, "DROP TABLE IF EXISTS residentCredData;",-1, &dbps, NULL);
+    dbres = sqlite3_step(dbps);
+    
+    dbres = sqlite3_prepare(pDB, "DROP INDEX IF EXISTS residentCredData_idx01;",-1, &dbps, NULL);
+    dbres = sqlite3_step(dbps);
+    
+    dbres = sqlite3_prepare(pDB, "DROP INDEX IF EXISTS residentCredData_idx02;",-1, &dbps, NULL);
+    dbres = sqlite3_step(dbps);
+    
+    dbres = sqlite3_prepare(pDB, "DROP INDEX IF EXISTS residentCredData_idx03;",-1, &dbps, NULL);
+    dbres = sqlite3_step(dbps);
+    
+    dbres = sqlite3_prepare(pDB, "DROP INDEX IF EXISTS residentCredData_idx04;",-1, &dbps, NULL);
+    dbres = sqlite3_step(dbps);
+    
+    dbres = sqlite3_prepare(pDB,
+                "CREATE TABLE IF NOT EXISTS residentCredData (\
+                idx          INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \
+                credUUID    TEXT DEFAULT '-', \
+                credDomain  TEXT DEFAULT '-', \
+                credName    TEXT DEFAULT '-', \
+                userid      TEXT DEFAULT '-', \
+                uname        TEXT DEFAULT '-', \
+                dname        TEXT DEFAULT '-', \
+                rpidhash    TEXT DEFAULT '-', \
+                cridhash    TEXT DEFAULT '-', \
+                residentkey TEXT DEFAULT '-', \
+                privkey     TEXT DEFAULT '-' \
+                );", -1, &dbps, NULL);
+    
+    dbres = sqlite3_step(dbps);
+    
+    dbres = SQLITE_ERROR;
+    dbres = sqlite3_prepare(pDB,"CREATE UNIQUE INDEX residentCredData_idx01 ON residentCredData (credUUID, rpidhash, cridhash);", -1, &dbps, NULL);
+    dbres = sqlite3_step(dbps);
+    
+    dbres = SQLITE_ERROR;
+    dbres = sqlite3_prepare(pDB,"CREATE INDEX residentCredData_idx02 ON residentCredData (rpidhash);", -1, &dbps, NULL);
+    dbres = sqlite3_step(dbps);
+    
+    dbres = SQLITE_ERROR;
+    dbres = sqlite3_prepare(pDB,"CREATE INDEX residentCredData_idx03 ON residentCredData (userid);", -1, &dbps, NULL);
+    dbres = sqlite3_step(dbps);
+    
+    dbres = SQLITE_ERROR;
+    dbres = sqlite3_prepare(pDB,"CREATE INDEX residentCredData_idx04 ON residentCredData (credUUID);", -1, &dbps, NULL);
+    dbres = sqlite3_step(dbps);
+    
+    dbps = NULL; //obsolet
+  }
+  _DB_CLOSE_
 }
 
-+(NSString*)readResidentKeys:(NSString*)cridHash rpidHash:(NSString*)rpidHash
++(void)storeResidentKeyRecord:(nonnull NSString*)credUUID
+                   credDomain:(nonnull NSString*)credDomain
+                     credName:(nonnull NSString*)credName
+                        uname:(nonnull NSString*)uname
+                       userid:(nonnull NSString*)userid
+                        dname:(nonnull NSString*)dname
+                     rpidhash:(nonnull NSString*)rpidhash
+                     cridhash:(nonnull NSString*)cridhash
+                  residentkey:(nonnull NSString*)residentkey
+                      privkey:(nonnull NSString*)privkey
 {
-	NSMutableString* sb = [[NSMutableString alloc] init];
-_DB_OPEN_
-	dbps=NULL;
-	NSString *cmd = nil;
-	cmd = [NSString stringWithFormat:@"SELECT rpidhash, cridhash, privkey from residentCredData where cridhash='%@' and rpidhash='%@';", cridHash, rpidHash];
-	dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
-	[db dumpSQLResultJSON:dbps sb:sb tableName:@"rklist"];
-	/*dbres =*/ sqlite3_finalize(dbps);
-_DB_CLOSE_
-	return [NSString stringWithString:sb];
+  _DB_OPEN_
+  NSString *cmd;
+  int dbres_1, dbres_2;
+  cmd = nil;
+  cmd = [NSString stringWithFormat:
+       @"INSERT OR REPLACE INTO residentCredData \
+       (credUUID,credDomain, credName, uname, userid, dname, rpidhash, cridhash, residentkey, privkey) \
+       VALUES ('%@','%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@');",
+         credUUID, credDomain, credName, uname, userid, dname, rpidhash, cridhash, residentkey, privkey];
+  _DB_EXECUTE_( cmd, dbres_1, dbres_2 );
+  _DB_CLOSE_
 }
 
++(nullable NSString*)readResidentKeys:(nonnull NSString*)credUUID
+                             rpidHash:(nonnull NSString*)rpidHash
+{
+  NSMutableString* sb = [[NSMutableString alloc] init];
+  _DB_OPEN_
+  
+  /* NSString *cmd = [NSString stringWithFormat:@"SELECT residentkey, privkey from residentCredData \ */
+  NSString *cmd = [NSString stringWithFormat:@"SELECT * from residentCredData \
+                                               where credUUID='%@' and rpidhash='%@' ;", credUUID, rpidHash];
+  dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
+  [db dumpSQLResultJSON:dbps sb:sb tableName:@"rklist"];
+  _DB_CLOSE_
+  return [NSString stringWithString:sb];
+}
+
++(nullable NSString*)readResidentKeys:(nonnull NSString*)credUUID
+                             cridHash:(nonnull NSString*)cridHash
+                             rpidHash:(nonnull NSString*)rpidHash
+{
+  NSMutableString* sb = [[NSMutableString alloc] init];
+  _DB_OPEN_
+  
+  NSString *cmd = nil;
+  /* cmd = [NSString stringWithFormat:@"SELECT rpidhash, cridhash, privkey from residentCredData \ */
+  cmd = [NSString stringWithFormat:@"SELECT * from residentCredData \
+                                     where credUUID='%@' and cridhash='%@' and rpidhash='%@';", credUUID, cridHash, rpidHash];
+  dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
+  [db dumpSQLResultJSON:dbps sb:sb tableName:@"rklist"];
+  _DB_CLOSE_
+  return [NSString stringWithString:sb];
+}
+
++(void) delete_All_residentCredData_4_credUUID:(nonnull NSString*)credUUID
+{
+  _DB_OPEN_
+  dbres = sqlite3_prepare(pDB,[[NSString stringWithFormat:@"DELETE from residentCredData \
+                                                            where credUUID='%@';", credUUID] UTF8String], -1, &dbps, NULL);
+  dbres = sqlite3_step(dbps);
+  _DB_CLOSE_
+}
+
++(void) deleteResidentCred4Idx:(NSString*)idx
+{
+  _DB_OPEN_
+  dbres = sqlite3_prepare(pDB,[[NSString stringWithFormat:@"DELETE from residentCredData \
+                                                            where idx='%@';", idx] UTF8String], -1, &dbps, NULL);
+  dbres = sqlite3_step(dbps);
+  _DB_CLOSE_
+}
+
+/*
+ Wird nur hier gebraucht um alle RC zu löschen.
+ */
 +(void) delete_All_residentCredData {
-_DB_OPEN_
-	dbps=NULL;
-	dbres = sqlite3_prepare(pDB,[[NSString stringWithFormat:@"DELETE from residentCredData;"] UTF8String], -1, &dbps, NULL);
-	dbres = sqlite3_step(dbps);
-	/*dbres =*/ sqlite3_finalize(dbps);
-_DB_CLOSE_
+  _DB_OPEN_
+  dbps=NULL;
+  dbres = sqlite3_prepare(pDB,[[NSString stringWithFormat:@"DELETE from residentCredData;"] UTF8String], -1, &dbps, NULL);
+  dbres = sqlite3_step(dbps);
+  _DB_CLOSE_
 }
+
 
 #pragma mark - Dump Tables -
 
@@ -380,7 +402,6 @@ _DB_OPEN_
 	int tx=0;
 	phrasedump = [db dumpSQLResult:dbps dump:phrasedump ptx:&tx];
 	phrasedump = [NSString stringWithFormat:@"%@</root>",phrasedump];
-	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 	return phrasedump;
 }
@@ -394,7 +415,6 @@ _DB_OPEN_
 	int tx=0;
 	phrasedump = [db dumpSQLResult:dbps dump:phrasedump ptx:&tx];
 	phrasedump = [NSString stringWithFormat:@"%@</root>",phrasedump];
-	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 	return phrasedump;
 }
@@ -407,7 +427,6 @@ _DB_OPEN_
 	cmd = [NSString stringWithFormat:@"SELECT * from %@;",tablename];
 	dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
 	[db dumpSQLResultJSON:dbps sb:sb tableName:tablename];
-	/*dbres =*/ sqlite3_finalize(dbps);
 _DB_CLOSE_
 	return [NSString stringWithString:sb];
 }

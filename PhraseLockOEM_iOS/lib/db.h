@@ -10,23 +10,22 @@
 #import <sqlite3.h>
 
 #define ALERT_ASYNC(_title_, _msg_)  \
-			dispatch_async(dispatch_get_main_queue(), ^{ \
-				UIAlertController* __alert__ = [UIAlertController alertControllerWithTitle: _title_ \
-				message: _msg_ \
-				preferredStyle:UIAlertControllerStyleAlert];
+      dispatch_async(dispatch_get_main_queue(), ^{ \
+        UIAlertController* __alert__ = [UIAlertController alertControllerWithTitle: _title_ \
+        message: _msg_ \
+        preferredStyle:UIAlertControllerStyleAlert];
 
 
 #define ALERT_BUTTON(_title_, _fnx_) \
-				[__alert__ addAction:[UIAlertAction actionWithTitle:_title_ style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){ \
-					_fnx_\
-				}]];
+        [__alert__ addAction:[UIAlertAction actionWithTitle:_title_ style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){ \
+          _fnx_\
+        }]];
 
 
 #define ALERT_ASYNC_SHOW \
-				__alert__.view.tintColor = [UIColor colorWithRed:0x0/255.0 green:0x40/255.0 blue:0x80/255.0 alpha:1.0]; \
-				/*[self presentViewController:__alert__ animated:NO completion:nil];*/ \
-				[__alert__ show]; \
-			});
+        __alert__.view.tintColor = [UIColor colorWithRed:0x0/255.0 green:0x40/255.0 blue:0x80/255.0 alpha:1.0]; \
+        [self presentViewController:__alert__ animated:NO completion:nil]; \
+      });
 
 /* ******** VALUES MUST ADOPTED TO YOUR SPECIFIC PHRASE-LOCK USB-KEY BEGIN ******** */
 
@@ -85,28 +84,28 @@
 
 #define _MEM_ERROR_ALERT_ 		/* Nothing left to do so far */
 
-#define _DB_OPEN_	int dbres = SQLITE_ERROR; \
-					int dbres_close = SQLITE_ERROR; \
-					{\
-								sqlite3 *pDB = NULL; \
-								NSString * dbPath  = [db db_filePath]; \
-								dbres = sqlite3_open([dbPath UTF8String],&pDB);	\
-								if(pDB!=NULL && pDB!=nil){ \
-									sqlite3_stmt *dbps=NULL;
+#define _DB_OPEN_  {\
+                      int dbres = SQLITE_ERROR; \
+                      sqlite3 *pDB = NULL; \
+                      NSString * dbPath  = [db db_filePath]; \
+                      dbres = sqlite3_open([dbPath UTF8String],&pDB);  \
+                      if(pDB!=NULL && pDB!=nil){ \
+                        int dbres = SQLITE_ERROR; \
+                        sqlite3_stmt *dbps=NULL;
 
 #define _DB_CLOSE_  \
-								dbres_close = sqlite3_close(pDB); \
-							} \
-					}
+                        if(dbps!=NULL){sqlite3_finalize(dbps);} \
+                        dbres = sqlite3_close(pDB); \
+                    } \
+                }
 
-#define _DB_EXECUTE_(_CMD_, _dbres_1, _dbres_2, _dbres_3) \
+#define _DB_EXECUTE_(_CMD_, _dbres_1, _dbres_2) \
 								_dbres_1 = SQLITE_ERROR; \
 								_dbres_2 = SQLITE_ERROR; \
-								_dbres_3 = SQLITE_ERROR; \
 								dbps=NULL; \
 								_dbres_1 = sqlite3_prepare(pDB,[_CMD_ UTF8String], -1, &dbps, NULL); \
-								_dbres_2 = sqlite3_step(dbps); \
-								_dbres_3 = sqlite3_finalize(dbps);
+								_dbres_2 = sqlite3_step(dbps);
+
 
 #define CURRENT_DB_NAME			@"phraselock_db"
 
@@ -156,19 +155,28 @@
 +(nullable NSString*) readTXTFile:(nonnull NSString*)fname ext:(nonnull NSString*)ext origBundle:(BOOL)origBundle;
 +(nullable NSData*) readCertDataFromFile:(nonnull NSString*)fname ext:(nonnull NSString*)ext origBundle:(BOOL)origBundle;
 
-#pragma mark - CTAP2 & Resident Credential Data -
+#pragma mark - Resident Credentials & U2F Keypairs -
 
-+(void)storeResidentKeyRecord:(nonnull NSString*)uname
-					   userid:(nonnull NSString*)userid
-						dname:(nonnull NSString*)dname
-					 rpidhash:(nonnull NSString*)rpidhash
-					 cridhash:(nonnull NSString*)cridhash
-				  residentkey:(nonnull NSString*)residentkey
-					  privkey:(nonnull NSString*)privkey;
++(void)storeResidentKeyRecord:(nonnull NSString*)credUUID
+                   credDomain:(nonnull NSString*)credDomain
+                     credName:(nonnull NSString*)credName
+                        uname:(nonnull NSString*)uname
+                       userid:(nonnull NSString*)userid
+                        dname:(nonnull NSString*)dname
+                     rpidhash:(nonnull NSString*)rpidhash
+                     cridhash:(nonnull NSString*)cridhash
+                  residentkey:(nonnull NSString*)residentkey
+                      privkey:(nonnull NSString*)privkey;
 
-+(nullable NSString*)readResidentKeys:(nonnull NSString*)rpidHash;
-+(nullable NSString*)readResidentKeys:(nonnull NSString*)cridHash rpidHash:(nonnull NSString*)rpidHash;
++(nullable NSString*)readResidentKeys:(nonnull NSString*)credUUID
+                             rpidHash:(nonnull NSString*)rpidHash;
 
++(nullable NSString*)readResidentKeys:(nonnull NSString*)credUUID
+                             cridHash:(nonnull NSString*)cridHash
+                             rpidHash:(nonnull NSString*)rpidHash;
+
++(void) delete_All_residentCredData_4_credUUID:(nonnull NSString*)credUUID;
++(void) deleteResidentCred4Idx:(nonnull NSString*)idx;
 +(void) delete_All_residentCredData;
 
 #pragma mark - Core Data Handling -

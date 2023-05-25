@@ -6,7 +6,6 @@
 //
 
 #import "AppDelegate.h"
-#import "UIAlertController+Window.h"
 #import "FC.h"
 #import "db.h"
 
@@ -94,20 +93,24 @@
                   residentkey:(NSString*)residentkey
                       privkey:(NSString*)privkey
 {
-	[db storeResidentKeyRecord:uname
-						userid:userid
-						 dname:dname
-					  rpidhash:rpidhash
-					  cridhash:cridhash
-				   residentkey:residentkey
-					   privkey:privkey];
+  [db storeResidentKeyRecord:rp1
+                  credDomain:credDomain
+                    credName:credName
+                       uname:uname
+                      userid:userid
+                       dname:dname
+                    rpidhash:rpidhash
+                    cridhash:cridhash
+                 residentkey:residentkey
+                     privkey:privkey];
 }
 
 -(NSString*)readResidentKeys:(NSString*)rp1
                          rp2:(NSString*)rp2
                     rpidHash:(NSString*)rpidHash
 {
-	return [db readResidentKeys:rpidHash];
+  return [db readResidentKeys:rp1
+                     rpidHash:rpidHash];
 }
 
 -(NSString*)readResidentKeys:(NSString*)rp1
@@ -115,7 +118,9 @@
                     cridHash:(NSString*)cridHash
                     rpidHash:(NSString*)rpidHash
 {
-	return [db readResidentKeys:cridHash rpidHash:rpidHash];
+  return [db readResidentKeys:rp1
+                     cridHash:cridHash
+                     rpidHash:rpidHash];
 }
 
 #define USER_ACTION			1

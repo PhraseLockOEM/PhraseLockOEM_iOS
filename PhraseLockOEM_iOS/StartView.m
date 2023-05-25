@@ -6,7 +6,6 @@
 //
 
 #import "AppDelegate.h"
-#import "UIAlertController+Window.h"
 #import "StartView.h"
 #import "FC.h"
 #import "db.h"
@@ -16,7 +15,10 @@
 #import <PhraseLockOEM/PLHID.h>
 
 #define DEBUG_IS_ACIVE					  YES
-#define AUTO_CONNECT_ON_LAUNCH			0
+/*
+ Set this to 1 if you want to connect on start automatically
+ */
+#define AUTO_CONNECT_ON_LAUNCH			1
 
 // iPoxo Community API-Key
 uint8_t COMMUNITY_API_KEY_T4[] = {
@@ -82,7 +84,7 @@ uint8_t IPOXO_API_KEY_T2[] = {
 
 	APPDELEGATE.ploem = [[PhraseLock alloc] initPhraseLock:APPDELEGATE
 													apiKey:apiKey
-											   debugFilter:0x0088];
+											   debugFilter:0xF0FF];
 	
 	[APPDELEGATE.ploem enableUserVerification:FALSE];
 	  
@@ -104,20 +106,20 @@ uint8_t IPOXO_API_KEY_T2[] = {
 	/**
 	 Logging explaination:
 	 
-	 #define FORCE_DEBUG		0x00000001		Forcing some output in debug-mode only
+	 #define FORCE_DEBUG		    0x00000001		Forcing some output in debug-mode only
 
-	 #define LOG_PL	       		0x00000002		Logging PhraseLock.m
-	 #define LOG_FDO_RW			0x00000004		Logging of CTAP1/CTAP2 Messages
-	 #define LOG_KEYS			0x00000008		Logging of keys exchanged! Do not set in release-versions!!!
+	 #define LOG_PL	       		  0x00000002		Logging PhraseLock.m
+	 #define LOG_FDO_RW			    0x00000004		Logging of CTAP1/CTAP2 Messages
+	 #define LOG_KEYS			      0x00000008		Logging of keys exchanged! Do not set in release-versions!!!
 
-	 #define LOG_CTAP			0x00000010		Deep logging of CTAP1/CTAP2 communication
-	 #define LOG_CBOR			0x00000020		Deep logging of CBOR
-	 #define LOG_DMP			0x00000040		Deep logging of dumps
+	 #define LOG_CTAP			      0x00000010		Deep logging of CTAP1/CTAP2 communication
+	 #define LOG_CBOR			      0x00000020		Deep logging of CBOR
+	 #define LOG_DMP			      0x00000040		Deep logging of dumps
 
-	 #define LOG_INIT			0x00000080		Logging of BLE init-prozess
-	 #define LOG_BLE_RW			0x00000100		Extended logging of BLE communication
-	 #define LOG_DGB_BLE		0x00000200		Logging of full BLE communication
-	 #define LOG_DGB_BLE_FINE	0x00000400		Deep logging of BLE communication
+	 #define LOG_INIT			      0x00000080		Logging of BLE init-prozess
+	 #define LOG_BLE_RW			    0x00000100		Extended logging of BLE communication
+	 #define LOG_DGB_BLE		    0x00000200		Logging of full BLE communication
+	 #define LOG_DGB_BLE_FINE	  0x00000400		Deep logging of BLE communication
 	*/
 
 	/*
@@ -149,6 +151,10 @@ uint8_t IPOXO_API_KEY_T2[] = {
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+  
+  NSString* jsonDump = [db dumpTable:@"residentCredData"];
+  NSLog(@"Dump of current resident credentials:\r %@",jsonDump);
+
 }
 
 #pragma mark - UI Actions -

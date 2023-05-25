@@ -12,7 +12,6 @@
 		D339DD3A28DA3DE6003512B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D339DD3828DA3DE6003512B1 /* Main.storyboard */; };
 		D339DD3F28DA3DE7003512B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D339DD3D28DA3DE7003512B1 /* LaunchScreen.storyboard */; };
 		D339DD4228DA3DE7003512B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D339DD4128DA3DE7003512B1 /* main.m */; };
-		D3690FB3291052200067D041 /* UIAlertController+Window.m in Sources */ = {isa = PBXBuildFile; fileRef = D3690FB2291052200067D041 /* UIAlertController+Window.m */; };
 		D371970B293AB20D00B4BA9C /* PhraseLockOEM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3719709293AB20700B4BA9C /* PhraseLockOEM.framework */; };
 		D371970C293AB20D00B4BA9C /* PhraseLockOEM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3719709293AB20700B4BA9C /* PhraseLockOEM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D3F7DF0128F3659E00B4A36E /* ch_fr.xml in Resources */ = {isa = PBXBuildFile; fileRef = D3F7DEEB28F3659E00B4A36E /* ch_fr.xml */; };
@@ -59,8 +58,6 @@
 		D339DD3E28DA3DE7003512B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D339DD4028DA3DE7003512B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D339DD4128DA3DE7003512B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D3690FB1291052200067D041 /* UIAlertController+Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Window.h"; sourceTree = "<group>"; };
-		D3690FB2291052200067D041 /* UIAlertController+Window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Window.m"; sourceTree = "<group>"; };
 		D3719709293AB20700B4BA9C /* PhraseLockOEM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PhraseLockOEM.framework; sourceTree = "<group>"; };
 		D3F7DEEB28F3659E00B4A36E /* ch_fr.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ch_fr.xml; sourceTree = "<group>"; };
 		D3F7DEEC28F3659E00B4A36E /* en_uk.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = en_uk.xml; sourceTree = "<group>"; };
@@ -182,8 +179,6 @@
 		D3F7DEF228F3659E00B4A36E /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				D3690FB1291052200067D041 /* UIAlertController+Window.h */,
-				D3690FB2291052200067D041 /* UIAlertController+Window.m */,
 				D3F7DF0F28F3660F00B4A36E /* TBXML.h */,
 				D3F7DF0E28F3660F00B4A36E /* TBXML.m */,
 				D3F7DEF428F3659E00B4A36E /* db.h */,
@@ -326,7 +321,6 @@
 				D3F7DF2728F4ACE900B4A36E /* Scanner.mm in Sources */,
 				D3F7DF2628F4ACE900B4A36E /* MTBBarcodeScanner.m in Sources */,
 				D3F7DF2528F4ACE900B4A36E /* QRProxy.m in Sources */,
-				D3690FB3291052200067D041 /* UIAlertController+Window.m in Sources */,
 				D3F7DF0928F3659E00B4A36E /* PLOEMController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
