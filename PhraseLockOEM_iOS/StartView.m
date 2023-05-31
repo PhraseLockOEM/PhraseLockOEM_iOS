@@ -102,6 +102,9 @@ uint8_t IPOXO_API_KEY_T2[] = {
                                p12PrivCert:p12PrivCert
                                    certPWD:[APPDELEGATE getCertPWD:certID]];
 	}
+  
+  
+  uint32_t counter = [APPDELEGATE.ploem incrementCounter:0];
 
 	/**
 	 Logging explaination:

@@ -45,6 +45,7 @@
 -(void) unLoadTokenID;
 
 -(bool) changePINCode:(NSString*)pinCode;
+-(uint32_t)incrementCounter:(uint32_t) increment;
 
 -(void) enableUserVerification:(bool)uv;
 
@@ -122,6 +123,7 @@
 #pragma mark - Service functions -
 
 -(BOOL) phraselock_v01;
+-(uint8_t) hidMode;
 -(int) plp_getPLVersion;
 -(void) plp_sendHIDData:(uint8_t*)hdata len:(int)len delayF:(uint8_t)delayF;
 
