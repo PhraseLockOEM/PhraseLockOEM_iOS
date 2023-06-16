@@ -89,22 +89,24 @@ uint8_t IPOXO_API_KEY_T2[] = {
 	[APPDELEGATE.ploem enableUserVerification:FALSE];
 	  
 	bool bInit = [APPDELEGATE.ploem loadTokenID:rp1
-											rp2:rp2
-										pinCode:nil
-									p12PrivCert:p12PrivCert
-										certPWD:[APPDELEGATE getCertPWD:certID]];
+                                          rp2:rp2
+                                        reset:NO
+                                      pinCode:nil
+                                  p12PrivCert:p12PrivCert
+                                      certPWD:[APPDELEGATE getCertPWD:certID]];
 
 	if(!bInit)
 	{
     bInit = [APPDELEGATE.ploem loadTokenID:rp1
                                        rp2:rp2
+                                     reset:NO
                                    pinCode:self.hidString.text
                                p12PrivCert:p12PrivCert
                                    certPWD:[APPDELEGATE getCertPWD:certID]];
 	}
   
   
-  uint32_t counter = [APPDELEGATE.ploem incrementCounter:0];
+  // uint32_t counter = [APPDELEGATE.ploem incrementCounter:0];
 
 	/**
 	 Logging explaination:

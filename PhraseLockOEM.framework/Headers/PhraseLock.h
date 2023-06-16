@@ -37,10 +37,11 @@
 		debugFilter:(uint32_t)debugFilter;
 
 -(bool) loadTokenID:(NSString*)rp1
-				rp2:(NSString*)rp2
-			pinCode:(NSString*)pinCode
-		p12PrivCert:(NSData*)p12PrivCert
-			certPWD:(NSString*)certPWD;
+                rp2:(NSString*)rp2
+              reset:(BOOL)reset
+            pinCode:(NSString*)pinCode
+        p12PrivCert:(NSData*)p12PrivCert
+            certPWD:(NSString*)certPWD;
 
 -(void) unLoadTokenID;
 
