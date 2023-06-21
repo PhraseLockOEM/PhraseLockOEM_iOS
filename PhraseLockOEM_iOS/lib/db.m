@@ -22,8 +22,8 @@ NSString *const kApplicationGroupId = @"group.com.phraselock.oem";
 
 #pragma mark - DB Initialisation -
 
-+(void)initOnStartDB{
-			
++(void)initOnStartDB
+{			
 	// Block-Data
 	[db checkBlockDataExists:FALSE];
 	
@@ -327,7 +327,6 @@ _DB_CLOSE_
   _DB_EXECUTE_( cmd, dbres_1, dbres_2 );
   _DB_CLOSE_
 }
-
 +(nullable NSString*)readResidentKeys:(nonnull NSString*)credUUID
                              rpidHash:(nonnull NSString*)rpidHash
 {
