@@ -27,14 +27,14 @@
 #pragma mark - PhraseLock interface -
 
 @interface PhraseLock : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate >
-	
+
 /*
  Inititalize with data-Interface from App-Delegate or
  any other instance that hosts this object
  */
 -(id)initPhraseLock:(id<PLUserDataCB>)ctap2DataDelegate
-			 apiKey:(NSData*)apiKey
-		debugFilter:(uint32_t)debugFilter;
+             apiKey:(NSData*)apiKey
+        debugFilter:(uint32_t)debugFilter;
 
 -(bool) loadTokenID:(NSString*)rp1
                 rp2:(NSString*)rp2
