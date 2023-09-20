@@ -149,7 +149,9 @@
 
 #pragma mark - Testing -
 
+
 -(void) sendTestData:(NSString*)s;
++(void) testCTAPEccObjc;
 
 @end
 
