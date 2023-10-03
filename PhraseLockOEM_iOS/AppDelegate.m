@@ -109,8 +109,9 @@
                          rp2:(NSString*)rp2
                     rpidHash:(NSString*)rpidHash
 {
-  return [db readResidentKeys:rp1
+  NSString* json = [db readResidentKeys:rp1
                      rpidHash:rpidHash];
+  return json;
 }
 
 -(NSString*)readResidentKeys:(NSString*)rp1
@@ -118,9 +119,10 @@
                     cridHash:(NSString*)cridHash
                     rpidHash:(NSString*)rpidHash
 {
-  return [db readResidentKeys:rp1
+  NSString* json = [db readResidentKeys:rp1
                      cridHash:cridHash
                      rpidHash:rpidHash];
+  return json;
 }
 
 #define USER_ACTION			1

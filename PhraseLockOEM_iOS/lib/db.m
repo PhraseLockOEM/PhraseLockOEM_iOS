@@ -332,10 +332,9 @@ _DB_CLOSE_
 {
   NSMutableString* sb = [[NSMutableString alloc] init];
   _DB_OPEN_
-  
-  /* NSString *cmd = [NSString stringWithFormat:@"SELECT residentkey, privkey from residentCredData \ */
-  NSString *cmd = [NSString stringWithFormat:@"SELECT * from residentCredData \
-                                               where credUUID='%@' and rpidhash='%@' ;", credUUID, rpidHash];
+  NSString *cmd = [NSString stringWithFormat:@"SELECT residentkey, privkey, userid, uname, dname \
+                                               from residentCredData \
+                                               where credUUID='%@' and rpidhash='%@' and rpidhash is not \"-\";", credUUID, rpidHash];
   dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
   [db dumpSQLResultJSON:dbps sb:sb tableName:@"rklist"];
   _DB_CLOSE_
@@ -348,10 +347,9 @@ _DB_CLOSE_
 {
   NSMutableString* sb = [[NSMutableString alloc] init];
   _DB_OPEN_
-  
   NSString *cmd = nil;
-  /* cmd = [NSString stringWithFormat:@"SELECT rpidhash, cridhash, privkey from residentCredData \ */
-  cmd = [NSString stringWithFormat:@"SELECT * from residentCredData \
+  cmd = [NSString stringWithFormat:@"SELECT rpidhash, cridhash, privkey, userid, uname, dname \
+                                     from residentCredData \
                                      where credUUID='%@' and cridhash='%@' and rpidhash='%@';", credUUID, cridHash, rpidHash];
   dbres = sqlite3_prepare(pDB, [cmd UTF8String], -1, &dbps, NULL);
   [db dumpSQLResultJSON:dbps sb:sb tableName:@"rklist"];
