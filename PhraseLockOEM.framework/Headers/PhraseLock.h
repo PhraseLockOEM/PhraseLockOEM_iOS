@@ -60,6 +60,9 @@
 - (void) writeValueWrp:(NSData *)data charUUID:(NSString*)charUUID;
 - (void) readValueWrp:(NSString*)charUUID;
 
+/* Set HID-Mode of the USB-Key*/
+-(void)setUSBMode:(uint8_t)usbMode;
+
 /* Connection status to BLE-Device*/
 -(BOOL)hasConnection;
 
