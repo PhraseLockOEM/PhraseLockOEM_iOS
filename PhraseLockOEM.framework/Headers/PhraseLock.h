@@ -34,6 +34,8 @@
  */
 -(id)initPhraseLock:(id<PLUserDataCB>)ctap2DataDelegate
              apiKey:(NSData*)apiKey
+       fidoUSBDelay:(uint8_t)fidoUSBDelay
+      fidoMaxBlocks:(uint8_t)fidoMaxBlocks
         debugFilter:(uint32_t)debugFilter;
 
 -(bool) loadTokenID:(NSString*)rp1
