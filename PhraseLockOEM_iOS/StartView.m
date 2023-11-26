@@ -18,7 +18,7 @@
 /*
  Set this to 1 if you want to connect on start automatically
  */
-#define AUTO_CONNECT_ON_LAUNCH			1
+#define AUTO_CONNECT_ON_LAUNCH			0
 
 // iPoxo Community API-Key
 uint8_t COMMUNITY_API_KEY_T4[] = {
@@ -83,11 +83,14 @@ uint8_t IPOXO_API_KEY_T2[] = {
 	NSData *apiKey = [[NSData alloc] initWithBytes:IPOXO_API_KEY length:sizeof(IPOXO_API_KEY)];
 
 	APPDELEGATE.ploem = [[PhraseLock alloc] initPhraseLock:APPDELEGATE
-													apiKey:apiKey
-											   debugFilter:0xF0FF];
+                                                  apiKey:apiKey
+                                            fidoUSBDelay:12
+                                           fidoMaxBlocks:5
+                                             debugFilter:0x0CFF];
 	
 	[APPDELEGATE.ploem enableUserVerification:FALSE];
 	  
+  /*
 	bool bInit = [APPDELEGATE.ploem loadTokenID:rp1
                                           rp2:rp2
                                         reset:NO
@@ -104,7 +107,7 @@ uint8_t IPOXO_API_KEY_T2[] = {
                                p12PrivCert:p12PrivCert
                                    certPWD:[APPDELEGATE getCertPWD:certID]];
 	}
-  
+  */
   
   // uint32_t counter = [APPDELEGATE.ploem incrementCounter:0];
 
@@ -157,8 +160,8 @@ uint8_t IPOXO_API_KEY_T2[] = {
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
   
-  NSString* jsonDump = [db dumpTable:@"residentCredData"];
-  NSLog(@"Dump of current resident credentials:\r %@",jsonDump);
+  //NSString* jsonDump = [db dumpTable:@"residentCredData"];
+  //NSLog(@"Dump of current resident credentials:\r %@",jsonDump);
 
 }
 
@@ -296,7 +299,7 @@ uint8_t IPOXO_API_KEY_T2[] = {
 #pragma mark - PhraseLockStatusDelegate callbacks -
 
 /*	Output of PhraseLock-Framework logging*/
--(void)delegateLogging:(uint32_t)filter logStr:(NSString*)logStr
+-(void)delegateLogging:(uint32_t)filter logStr:(const NSString*)logStr
 {
 	dispatch_async(dispatch_get_main_queue(), ^{
 		printf("%s\n", [logStr cStringUsingEncoding:[NSString defaultCStringEncoding]] );

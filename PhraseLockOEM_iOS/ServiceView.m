@@ -32,8 +32,8 @@
 -(void)inner_deleteAllRK
 {
   [db delete_All_residentCredData];
-  NSString* jsonDump = [db dumpTable:@"residentCredData"];
-  NSLog(@"Dump of current resident credentials:\r %@",jsonDump);
+  //NSString* jsonDump = [db dumpTable:@"residentCredData"];
+  //NSLog(@"Dump of current resident credentials:\r %@",jsonDump);
 }
 
 - (IBAction)onDeleteResidentKeys:(id)sender

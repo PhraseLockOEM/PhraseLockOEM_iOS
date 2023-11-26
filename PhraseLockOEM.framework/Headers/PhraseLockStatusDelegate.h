@@ -36,7 +36,7 @@
 -(void) delegateReceiveUSBMode:(uint8_t)usbMode;
 
 /*	Output of PhraseLock-Framework logging */
--(void)delegateLogging:(uint32_t)filter logStr:(NSString*)logStr;
+-(void)delegateLogging:(uint32_t)filter logStr:(const NSString*)logStr;
 
 /* Called to modify download progress ba */
 void delegateSUOTAInstallProgress(double percent);
