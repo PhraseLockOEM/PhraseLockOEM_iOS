@@ -133,6 +133,10 @@
 -(int) plp_getPLVersion;
 -(void) plp_sendHIDData:(uint8_t*)hdata len:(int)len delayF:(uint8_t)delayF;
 
+#pragma mark - COM_TEST -
+
+-(void) plp_com_test:(int) mode;
+
 #pragma mark - SUOTA functions -
 
 -(void) plp_startSUOTADownLoad:(NSData*)updateFileData;
